@@ -308,7 +308,12 @@ copies or substantial portions of the Software.
 
 ## 👨‍💻 Contacto
 
-**Arkanabytes** - [@Arkanabytes](https://github.com/Arkanabytes)
+[*Consuelo Alejandra Pinto Toro*](https://github.com/Arkanabytes)
+[*Constanza Badilla*](https://github.com/Conybri)
+[*Carlos Peña*](https://github.com/Carlosssantonio)
+[*Jose Lui Lillo*](https://github.com/Pilishijam-23)
+[*Jose Lui Lillo*](https://github.com/galdamesf)
+
 
 📧 Email: contacto@arkanabytes.com
 
