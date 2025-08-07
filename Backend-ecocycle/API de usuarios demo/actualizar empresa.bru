@@ -1,0 +1,15 @@
+meta {
+  name: actualizar empresa
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:8080/api/empresas
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
