@@ -1,9 +1,0 @@
-{
-  "version": "1",
-  "name": "eco",
-  "type": "collection",
-  "ignore": [
-    "node_modules",
-    ".git"
-  ]
-}
