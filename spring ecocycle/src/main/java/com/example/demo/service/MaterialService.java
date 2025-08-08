@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la gestión de materiales reciclables.
+ * Proporciona la lógica de negocio para operaciones CRUD sobre las entidades de Material.
+ */
 @Service
 public class MaterialService {
 

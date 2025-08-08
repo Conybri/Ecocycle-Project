@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión del historial de reciclaje.
+ * Expone endpoints para realizar operaciones CRUD sobre los registros de reciclaje.
+ */
 @RestController
 @RequestMapping("/api/historial-reciclaje")
 public class HistorialReciclajeController {

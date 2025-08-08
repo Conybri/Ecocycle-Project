@@ -1,48 +1,25 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Embeddable;
-import java.io.Serializable;
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serializable;
+
+/**
+ * Clase de clave primaria compuesta para la entidad `UsuarioLogro`.
+ * Representa la combinación de `usuarioId` y `logroId` como una clave única.
+ */
 @Embeddable
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class UsuarioLogroId implements Serializable {
     private long usuarioId;
     private long logroId;
-
-    public UsuarioLogroId() {
-    }
-
-    public UsuarioLogroId(long usuarioId, long logroId) {
-        this.usuarioId = usuarioId;
-        this.logroId = logroId;
-    }
-
-    public long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public long getLogroId() {
-        return logroId;
-    }
-
-    public void setLogroId(long logroId) {
-        this.logroId = logroId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UsuarioLogroId that = (UsuarioLogroId) o;
-        return usuarioId == that.usuarioId && logroId == that.logroId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(usuarioId, logroId);
-    }
 }

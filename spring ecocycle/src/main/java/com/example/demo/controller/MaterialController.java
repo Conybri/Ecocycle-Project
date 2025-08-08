@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de materiales reciclables.
+ * Expone endpoints para realizar operaciones CRUD sobre los materiales.
+ */
 @RestController
 @RequestMapping("/api/materiales")
 public class MaterialController {

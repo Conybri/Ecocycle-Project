@@ -14,6 +14,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Implementación del servicio para la gestión de usuarios.
+ * Proporciona la lógica de negocio para operaciones CRUD sobre las entidades de Usuario,
+ * incluyendo la encriptación de contraseñas y la validación de unicidad del email.
+ */
 @Service @Transactional
 public class UsuarioServiceImpl implements UsuarioService {
 

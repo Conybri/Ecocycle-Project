@@ -4,6 +4,10 @@ import com.example.usuarios.dto.request.UsuarioFilterRequest;
 import com.example.usuarios.model.Usuario;
 import org.springframework.data.jpa.domain.Specification;
 
+/**
+ * Clase de utilidad para construir especificaciones JPA dinámicas para la entidad `Usuario`.
+ * Permite filtrar usuarios basándose en varios criterios definidos en `UsuarioFilterRequest`.
+ */
 public class UsuarioSpecifications {
 
     public static Specification<Usuario> build(UsuarioFilterRequest f) {

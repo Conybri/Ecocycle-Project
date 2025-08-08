@@ -4,11 +4,25 @@ import com.example.usuarios.model.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * Entidad que representa un registro en el historial de reciclaje.
+ * Almacena información sobre la cantidad de material reciclado, el usuario, el material, la empresa,
+ * los puntos ganados y la fecha de reciclaje.
+ */
 @Entity
 @Table(name = "historial_reciclaje")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class HistorialReciclaje {
 
     @Id
@@ -43,68 +57,6 @@ public class HistorialReciclaje {
 
     @Size(max = 255)
     private String estado;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
-    public BigDecimal getCantidadKg() {
-        return cantidadKg;
-    }
-
-    public void setCantidadKg(BigDecimal cantidadKg) {
-        this.cantidadKg = cantidadKg;
-    }
-
-    public Integer getPuntosGanados() {
-        return puntosGanados;
-    }
-
-    public void setPuntosGanados(Integer puntosGanados) {
-        this.puntosGanados = puntosGanados;
-    }
-
-    public Instant getFechaReciclaje() {
-        return fechaReciclaje;
-    }
-
-    public void setFechaReciclaje(Instant fechaReciclaje) {
-        this.fechaReciclaje = fechaReciclaje;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }
+
+    

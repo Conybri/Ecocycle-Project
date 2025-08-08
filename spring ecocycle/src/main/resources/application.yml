@@ -20,5 +20,5 @@ server:
   port: 8080
 
 jwt:
-  secret: ${JWT_SECRET:your_super_secret_key_replace_with_a_strong_one}
+  secret: ${JWT_SECRET}
   expiration: 3600000 # 1 hour in milliseconds

@@ -17,6 +17,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la gestión del historial de reciclaje.
+ * Proporciona la lógica de negocio para operaciones CRUD sobre los registros de reciclaje,
+ * incluyendo la actualización de puntos del usuario.
+ */
 @Service
 public class HistorialReciclajeService {
 

@@ -1,11 +1,24 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Entidad que representa la relación entre una empresa y un material.
+ * Utiliza una clave primaria compuesta definida por `EmpresaMaterialId`.
+ */
 @Entity
 @Table(name = "empresa_materiales")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmpresaMaterial {
 
     @EmbeddedId
@@ -20,28 +33,6 @@ public class EmpresaMaterial {
     @MapsId("materialId")
     @JoinColumn(name = "material_id", nullable = false)
     private Material material;
-
-    public EmpresaMaterialId getId() {
-        return id;
-    }
-
-    public void setId(EmpresaMaterialId id) {
-        this.id = id;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
 }
+
+    
