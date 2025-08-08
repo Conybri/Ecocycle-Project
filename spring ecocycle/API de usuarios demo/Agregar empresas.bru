@@ -1,0 +1,29 @@
+meta {
+  name: Agregar empresas
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/api/empresas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombreEmpresa": "EcoRecicla S.A.",
+                "rut": "76123456-7",
+                 "nombreContacto": "Ana Torres",
+                 "cargoContacto": "Gerente de Operaciones",
+                 "emailCorporativo": "ana.torres@ecorecicla.cl",
+                 "telefono": "+56912345678",
+                 "direccion": "Av. Siempre Viva 742, Santiago",
+                 "capacidadMensual": "10000 kg",
+                "descripcion": "Empresa dedicada al reciclaje de plásticos y metales."
+  }
+}
+
+settings {
+  encodeUrl: true
+}

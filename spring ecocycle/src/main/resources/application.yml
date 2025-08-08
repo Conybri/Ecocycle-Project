@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+  sql:
+    init:
+      mode: always
+
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET:your_super_secret_key_replace_with_a_strong_one}
+  expiration: 3600000 # 1 hour in milliseconds

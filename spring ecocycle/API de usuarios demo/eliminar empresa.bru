@@ -1,0 +1,15 @@
+meta {
+  name: eliminar empresa
+  type: http
+  seq: 8
+}
+
+delete {
+  url: http://localhost:8080/api/empresas
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
