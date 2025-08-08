@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de empresas.
+ * Expone endpoints para realizar operaciones CRUD sobre las empresas.
+ */
 @RestController
 @RequestMapping("/api/empresas")
 public class EmpresaController {

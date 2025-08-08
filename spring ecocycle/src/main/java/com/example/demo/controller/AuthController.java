@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador REST para la autenticación de usuarios (registro y login).
+ * Expone endpoints para que los usuarios puedan registrarse y obtener tokens JWT para acceder a recursos protegidos.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

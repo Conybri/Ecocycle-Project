@@ -4,6 +4,10 @@ import com.example.usuarios.dto.request.UsuarioRequest;
 import com.example.usuarios.dto.response.UsuarioResponse;
 import com.example.usuarios.model.Usuario;
 
+/**
+ * Clase de utilidad para mapear entre objetos DTO (Data Transfer Object) y entidades de Usuario.
+ * Facilita la conversión de datos entre las capas de la aplicación.
+ */
 public class UsuarioMapper {
 
     public static Usuario toEntity(UsuarioRequest req) {

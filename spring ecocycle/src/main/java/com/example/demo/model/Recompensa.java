@@ -4,9 +4,21 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * Entidad que representa una recompensa en el sistema.
+ * Almacena información sobre el título, descripción y los puntos necesarios para obtener la recompensa.
+ */
 @Entity
 @Table(name = "recompensas")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Recompensa {
 
     @Id
@@ -24,36 +36,6 @@ public class Recompensa {
     @NotNull
     @Column(name = "puntos_necesarios", nullable = false)
     private Integer puntosNecesarios;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Integer getPuntosNecesarios() {
-        return puntosNecesarios;
-    }
-
-    public void setPuntosNecesarios(Integer puntosNecesarios) {
-        this.puntosNecesarios = puntosNecesarios;
-    }
 }
+
+    

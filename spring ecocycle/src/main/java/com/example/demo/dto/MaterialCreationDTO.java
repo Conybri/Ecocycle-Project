@@ -3,7 +3,19 @@ package com.example.demo.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * DTO (Data Transfer Object) para la creación de un nuevo material reciclable.
+ * Contiene los campos necesarios para registrar un material en el sistema.
+ */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MaterialCreationDTO {
 
     @NotBlank
@@ -18,37 +30,5 @@ public class MaterialCreationDTO {
 
     @NotNull
     private Integer puntos;
-
-    // Getters y Setters
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Integer getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(Integer puntos) {
-        this.puntos = puntos;
-    }
 }
+    

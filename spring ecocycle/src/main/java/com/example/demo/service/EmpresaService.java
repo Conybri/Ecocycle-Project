@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la gestión de empresas.
+ * Proporciona la lógica de negocio para operaciones CRUD sobre las entidades de Empresa.
+ */
 @Service
 public class EmpresaService {
 

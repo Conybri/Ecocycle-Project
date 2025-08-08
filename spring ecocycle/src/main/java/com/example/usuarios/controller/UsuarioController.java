@@ -12,6 +12,10 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador REST para la gestión de usuarios.
+ * Expone endpoints para realizar operaciones CRUD sobre los usuarios.
+ */
  @RestController @RequestMapping("/api/usuarios")
 public class UsuarioController {
 

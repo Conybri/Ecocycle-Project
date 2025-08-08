@@ -13,6 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuración de seguridad para la aplicación Spring Boot.
+ * Define las reglas de autorización, la gestión de sesiones y la integración de JWT.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -34,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/empresas/**").permitAll()
                         .requestMatchers("/api/materiales/**").permitAll()
                         .requestMatchers("/api/public/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

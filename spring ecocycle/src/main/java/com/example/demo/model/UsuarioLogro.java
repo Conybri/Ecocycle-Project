@@ -2,12 +2,25 @@ package com.example.demo.model;
 
 import com.example.usuarios.model.Usuario;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+/**
+ * Entidad que representa la relación entre un usuario y un logro.
+ * Utiliza una clave primaria compuesta definida por `UsuarioLogroId`.
+ */
 @Entity
 @Table(name = "usuario_logros")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioLogro {
 
     @EmbeddedId
@@ -25,36 +38,6 @@ public class UsuarioLogro {
 
     @Column(name = "fecha_obtenido", nullable = false, updatable = false)
     private Instant fechaObtenido;
-
-    public UsuarioLogroId getId() {
-        return id;
-    }
-
-    public void setId(UsuarioLogroId id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Logro getLogro() {
-        return logro;
-    }
-
-    public void setLogro(Logro logro) {
-        this.logro = logro;
-    }
-
-    public Instant getFechaObtenido() {
-        return fechaObtenido;
-    }
-
-    public void setFechaObtenido(Instant fechaObtenido) {
-        this.fechaObtenido = fechaObtenido;
-    }
 }
+
+    
