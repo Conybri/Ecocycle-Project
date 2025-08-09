@@ -12,6 +12,6 @@ public record UsuarioRequest(
         @NotBlank @Email @Size(max = 50) String email, // Email del usuario (debe ser único y válido)
         @NotBlank @Size(min = 8, max = 255) String password, // Contraseña del usuario (se encriptará antes de guardar)
         @Size(max = 50) String ciudad, // Ciudad de residencia del usuario
-        @Size(max = 20) String role, // Rol del usuario (ej. "USER", "ADMIN"), por defecto "USER"
+        String role, // Rol del usuario (ej. "USER", "ADMIN"), por defecto "USER"
         Integer puntosTotales // Puntos totales acumulados por el usuario
 ) {}

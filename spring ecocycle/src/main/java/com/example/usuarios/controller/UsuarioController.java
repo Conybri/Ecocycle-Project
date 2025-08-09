@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * Controlador REST para la gestión de usuarios.
  * Expone endpoints para realizar operaciones CRUD sobre los usuarios.
  */
- @RestController @RequestMapping("/api/usuarios")
+ @RestController @RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final UsuarioService service;

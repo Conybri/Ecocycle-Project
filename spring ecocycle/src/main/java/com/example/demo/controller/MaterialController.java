@@ -15,7 +15,7 @@ import java.util.List;
  * Expone endpoints para realizar operaciones CRUD sobre los materiales.
  */
 @RestController
-@RequestMapping("/api/materiales")
+@RequestMapping("/materiales")
 public class MaterialController {
 
     private final MaterialService materialService;

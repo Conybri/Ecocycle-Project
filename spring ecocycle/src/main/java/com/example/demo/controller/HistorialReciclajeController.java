@@ -15,7 +15,7 @@ import java.util.List;
  * Expone endpoints para realizar operaciones CRUD sobre los registros de reciclaje.
  */
 @RestController
-@RequestMapping("/api/historial-reciclaje")
+@RequestMapping("/historial-reciclaje")
 public class HistorialReciclajeController {
 
     private final HistorialReciclajeService historialReciclajeService;

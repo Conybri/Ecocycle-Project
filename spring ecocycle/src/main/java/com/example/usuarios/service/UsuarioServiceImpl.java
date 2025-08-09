@@ -1,5 +1,6 @@
 package com.example.usuarios.service;
 
+import com.example.security.model.Role;
 import com.example.usuarios.dto.request.UsuarioFilterRequest;
 import com.example.usuarios.dto.request.UsuarioRequest;
 import com.example.usuarios.dto.response.UsuarioResponse;
@@ -36,6 +37,17 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new DataIntegrityViolationException("El email ya está registrado");
         }
         Usuario entity = UsuarioMapper.toEntity(request);
+        // Asignar el rol por defecto si no se proporciona o es inválido
+        if (request.role() != null) {
+            try {
+                entity.setRole(Role.valueOf("ROLE_" + request.role().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                // Si el rol proporcionado no es válido, se asigna el rol por defecto
+                entity.setRole(Role.ROLE_USER);
+            }
+        } else {
+            entity.setRole(Role.ROLE_USER);
+        }
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         Usuario saved = repository.save(entity);
         return UsuarioMapper.toResponse(saved);
@@ -54,6 +66,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         UsuarioMapper.updateEntity(entity, request);
         if (request.password() != null) {
             entity.setPassword(passwordEncoder.encode(request.password()));
+        }
+        // Actualizar el rol si se proporciona y es válido
+        if (request.role() != null) {
+            try {
+                entity.setRole(Role.valueOf("ROLE_" + request.role().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                // Si el rol proporcionado no es válido, se mantiene el rol existente
+            }
         }
         Usuario updated = repository.save(entity);
         return UsuarioMapper.toResponse(updated);

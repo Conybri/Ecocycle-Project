@@ -2,8 +2,8 @@ package com.example.usuarios.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import com.example.security.model.Role;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
@@ -52,12 +52,12 @@ public class Usuario implements UserDetails {
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private Instant fechaRegistro;
 
-    @NotBlank @Size(max = 20)
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 20)
-    private String role = "USER"; // Default role
+    private Role role = Role.ROLE_USER; // Default role
 
     // Constructor para el mapper y creación de usuarios
-    public Usuario(String nombre, String apellido, String email, String password, String ciudad, Integer puntosTotales, String role) {
+    public Usuario(String nombre, String apellido, String email, String password, String ciudad, Integer puntosTotales, Role role) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -68,7 +68,7 @@ public class Usuario implements UserDetails {
     }
 
     // Constructor para la carga desde la base de datos (puede ser usado por JPA)
-    public Usuario(Long id, String nombre, String apellido, String email, String password, String ciudad, Integer puntosTotales, Instant fechaRegistro, String role) {
+    public Usuario(Long id, String nombre, String apellido, String email, String password, String ciudad, Integer puntosTotales, Instant fechaRegistro, Role role) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -89,7 +89,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+        return List.of(this.role);
     }
 
     @Override
