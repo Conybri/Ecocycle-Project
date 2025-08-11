@@ -1,5 +1,6 @@
 package com.example.usuarios.service;
 
+import com.example.security.model.Role;
 import com.example.usuarios.dto.request.UsuarioRequest;
 import com.example.usuarios.dto.response.UsuarioResponse;
 import com.example.usuarios.mapper.UsuarioMapper;
@@ -37,9 +38,9 @@ class UsuarioServiceTest {
 
     @BeforeEach
     void setUp() {
-        usuario = new Usuario("Test", "User", "test@example.com", "password123", "City", 0, "USER");
+        usuario = new Usuario("Test", "User", "test@example.com", "password123", "City", 0, Role.ROLE_USER);
         usuario.setId(1L);
-        usuarioRequest = new UsuarioRequest("Test", "User", "test@example.com", "password123", "City", "USER", 0);
+        usuarioRequest = new UsuarioRequest("Test", "User", "test@example.com", "password123", "City", Role.ROLE_USER.name(), 0);
     }
 
     @Test
@@ -70,7 +71,7 @@ class UsuarioServiceTest {
         when(passwordEncoder.encode(anyString())).thenReturn("newEncodedPassword");
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuario);
 
-        UsuarioRequest updatedRequest = new UsuarioRequest("Updated", "User", "updated@example.com", "newPassword", "NewCity", "USER", 10);
+        UsuarioRequest updatedRequest = new UsuarioRequest("Updated", "User", "updated@example.com", "newPassword", "NewCity", Role.ROLE_USER.name(), 10);
         UsuarioResponse response = usuarioService.actualizar(1L, updatedRequest);
 
         assertNotNull(response);
@@ -88,13 +89,13 @@ class UsuarioServiceTest {
 
     @Test
     void actualizar_EmailAlreadyExists_ThrowsException() {
-        Usuario existingUser = new Usuario("Existing", "User", "existing@example.com", "pass", "City", 0, "USER");
+        Usuario existingUser = new Usuario("Existing", "User", "existing@example.com", "pass", "City", 0, Role.ROLE_USER);
         existingUser.setId(2L);
 
         when(usuarioRepository.findById(anyLong())).thenReturn(Optional.of(usuario));
         when(usuarioRepository.existsByEmail(anyString())).thenReturn(true);
 
-        UsuarioRequest updatedRequest = new UsuarioRequest("Updated", "User", "existing@example.com", "newPassword", "NewCity", "USER", 10);
+        UsuarioRequest updatedRequest = new UsuarioRequest("Updated", "User", "existing@example.com", "newPassword", "NewCity", Role.ROLE_USER.name(), 10);
         assertThrows(DataIntegrityViolationException.class, () -> usuarioService.actualizar(1L, updatedRequest));
         verify(usuarioRepository, never()).save(any(Usuario.class));
     }

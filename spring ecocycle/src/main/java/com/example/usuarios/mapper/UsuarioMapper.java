@@ -1,5 +1,6 @@
 package com.example.usuarios.mapper;
 
+import com.example.security.model.Role;
 import com.example.usuarios.dto.request.UsuarioRequest;
 import com.example.usuarios.dto.response.UsuarioResponse;
 import com.example.usuarios.model.Usuario;
@@ -19,7 +20,7 @@ public class UsuarioMapper {
                 req.password(),
                 req.ciudad(),
                 req.puntosTotales() != null ? req.puntosTotales() : 0,
-                req.role() != null ? req.role() : "USER"
+                req.role() != null ? Role.valueOf("ROLE_" + req.role().toUpperCase()) : Role.ROLE_USER
         );
     }
 
@@ -29,7 +30,7 @@ public class UsuarioMapper {
         if (req.email() != null) entity.setEmail(req.email());
         if (req.password() != null) entity.setPassword(req.password()); // Se codifica en el service
         if (req.ciudad() != null) entity.setCiudad(req.ciudad());
-        if (req.role() != null) entity.setRole(req.role());
+        if (req.role() != null) entity.setRole(Role.valueOf("ROLE_" + req.role().toUpperCase()));
         if (req.puntosTotales() != null) entity.setPuntosTotales(req.puntosTotales());
     }
 
@@ -43,7 +44,7 @@ public class UsuarioMapper {
                 entity.getCiudad(),
                 entity.getPuntosTotales(),
                 entity.getFechaRegistro(),
-                entity.getRole()
+                entity.getRole().name()
         );
     }
 }

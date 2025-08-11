@@ -15,7 +15,7 @@ import java.util.List;
  * Expone endpoints para realizar operaciones CRUD sobre las empresas.
  */
 @RestController
-@RequestMapping("/api/empresas")
+@RequestMapping("/empresas")
 public class EmpresaController {
 
     private final EmpresaService empresaService;
