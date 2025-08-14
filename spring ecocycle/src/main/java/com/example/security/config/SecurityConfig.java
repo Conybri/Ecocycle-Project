@@ -37,7 +37,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/login").permitAll() // Permitir acceso público al login
                         .requestMatchers("/auth/register").permitAll() // Permitir acceso público al registro
                         .requestMatchers("/auth/**").hasRole("ADMIN") // Proteger otras rutas de /api/auth/
-                        .requestMatchers("/usuarios/**").permitAll()
+                        .requestMatchers("/usuarios/**").hasRole("USER")
                         .requestMatchers("/empresas/**").hasRole("ADMIN")
                         .requestMatchers("/materiales/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
