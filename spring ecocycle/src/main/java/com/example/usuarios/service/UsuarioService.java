@@ -16,4 +16,5 @@ public interface UsuarioService {
     void eliminar(Long id);
     UsuarioResponse obtenerPorId(Long id);
     Page<UsuarioResponse> buscar(UsuarioFilterRequest filter, Pageable pageable);
+    UsuarioResponse obtenerPorEmail(String email);
 }

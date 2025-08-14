@@ -99,4 +99,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         return repository.findAll(UsuarioSpecifications.build(filter), pageable)
                 .map(UsuarioMapper::toResponse);
     }
+
+    @Override
+    public UsuarioResponse obtenerPorEmail(String email) {
+        return repository.findByEmail(email)
+                .map(UsuarioMapper::toResponse)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+    }
 }
