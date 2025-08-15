@@ -1,0 +1,199 @@
+:root {
+  --green-primary: #16a34a;
+  --green-secondary: #dcfce7;
+  --blue-primary: #3b82f6;
+  --gray-text: #4b5563;
+  --gray-light: #f3f4f6;
+  --white: #ffffff;
+}
+
+.home-page {
+  background-color: var(--green-secondary);
+}
+
+.hero-section {
+  padding-top: 5rem; /* py-12 */
+  margin-top: 3rem;
+  padding-bottom: 3rem; /* py-12 */
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    padding-top: 6rem; /* lg:py-24 */
+    padding-bottom: 6rem; /* lg:py-24 */
+  }
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.hero-section h1 {
+  font-size: 2.25rem; /* text-4xl */
+  line-height: 2.5rem;
+  font-weight: 700; /* font-bold */
+  color: #1f2937; /* text-gray-800 */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.text-green {
+  color: var(--green-primary); /* text-green-600 */
+}
+@media (min-width: 1024px) {
+  .hero-section h1 {
+    font-size: 3rem; /* lg:text-5xl */
+    line-height: 1;
+  }
+}
+
+.hero-section p {
+  font-size: 1.125rem; /* text-lg */
+  line-height: 1.75rem;
+  color: #374151; /* text-gray-700 */
+  margin-bottom: 2rem; /* mb-8 */
+  max-width: 56rem; /* max-w-3xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* gap-4 */
+}
+
+.btn {
+  font-weight: 700; /* font-bold */
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem;
+  padding-left: 2rem; /* px-8 */
+  padding-right: 2rem;
+  border-radius: 0.5rem; /* rounded-lg */
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-primary {
+  background-color: #059669; /* bg-emerald-600 */
+  color: #ffffff; /* text-white */
+}
+
+.btn-primary:hover {
+  background-color: #047857; /* hover:bg-emerald-700 */
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid #059669; /* border-2 border-emerald-600 */
+  color: #059669; /* text-emerald-600 */
+}
+
+.btn-secondary:hover {
+  background-color: #f0fdf4; /* hover:bg-emerald-50 */
+}
+
+.qr-section {
+  padding-top: 3rem; /* py-12 */
+  padding-bottom: 3rem;
+  background-color: #ffffff; /* bg-white */
+  text-align: center;
+}
+
+.qr-section h2 {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 2rem;
+  font-weight: 700; /* font-bold */
+  color: #1f2937; /* text-gray-800 */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.qr-section p {
+  color: #374151; /* text-gray-700 */
+  margin-bottom: 1.5rem; /* mb-6 */
+  max-width: 42rem; /* max-w-2xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.qr-placeholder-container {
+  display: flex;
+  justify-content: center;
+}
+
+.qr-placeholder {
+  width: 10rem; /* w-40 */
+  height: 10rem; /* h-40 */
+  border: 2px dashed #9ca3af; /* border-2 border-dashed border-gray-400 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-icon {
+  height: 4rem; /* h-16 */
+  width: 4rem; /* w-16 */
+  color: #9ca3af; /* text-gray-400 */
+}
+
+.benefits-section {
+  padding-top: 3rem; /* py-12 */
+  padding-bottom: 3rem;
+}
+
+.benefits-section h2 {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 2rem;
+  font-weight: 700; /* font-bold */
+  text-align: center;
+  color: #1f2937; /* text-gray-800 */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
+  gap: 2rem; /* gap-8 */
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* md:grid-cols-3 */
+  }
+}
+
+.benefit-card {
+  padding: 1.5rem; /* p-6 */
+  background-color: #ffffff; /* bg-white */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+}
+
+.benefit-card .icon {
+  font-size: 2.25rem; /* text-4xl */
+  line-height: 2.5rem;
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.benefit-card h3 {
+  font-weight: 700; /* font-bold */
+  font-size: 1.25rem; /* text-xl */
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.benefit-card p {
+  color: #374151; /* text-gray-700 */
+}
+
+.carousel-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: var(--white);
+}
