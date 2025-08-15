@@ -1,5 +1,6 @@
 package com.example.security.controller;
 
+import com.example.usuarios.dto.response.LoginResponse;
 import com.example.security.jwt.JwtUtil;
 import com.example.security.service.CustomUserDetailsService;
 import com.example.security.dto.request.LoginRequest;
@@ -42,25 +43,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity<LoginResponse> createAuthenticationToken(@RequestBody LoginRequest loginRequest) throws Exception {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password())
         );
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.email());
         final String jwt = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
-    }
-
-    // Helper class for authentication response
-    static class AuthenticationResponse {
-        private final String jwt;
-
-        public AuthenticationResponse(String jwt) {
-            this.jwt = jwt;
-        }
-
-        public String getJwt() {
-            return jwt;
-        }
+        final UsuarioResponse usuario = usuarioService.obtenerPorEmail(loginRequest.email());
+        return ResponseEntity.ok(new LoginResponse(jwt, usuario));
     }
 }
