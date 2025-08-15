@@ -22,7 +22,11 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="container">
-          <h1>EcoCycle | Transforma tus residuos en recursos</h1>
+          <h1>
+            EcoCycle | Transforma tus
+            <span className="text-green"> residuos </span>
+            en recursos
+          </h1>
           <p>
             Conéctate con empresas de reciclaje y contribuye a un mundo más
             sostenible. Cada objeto reciclado cuenta para nuestro futuro.
