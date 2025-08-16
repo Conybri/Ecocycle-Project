@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../styles/Navbar.css";
-import logo from "../../assets/img/logo.png";
+import Logo from "../../assets/img/Logo.webp";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +41,7 @@ const Navbar = () => {
       <div className="container">
         <Link to="/" className="nav-brand">
           <span>
-            <img src={logo} alt="EcoCycle Logo" className="logo" />
+            <img src={Logo} alt="EcoCycle Logo" className="logo" />
           </span>
         </Link>
 

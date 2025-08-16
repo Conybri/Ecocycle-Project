@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/Footer.css";
-import logo from "../../assets/img/logo.png";
+import Logo from "../../assets/img/Logo.webp";
 
 const Footer = () => {
   const footerSections = {
@@ -29,8 +29,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-brand">
-              <img src={logo} alt="EcoCycle Logo" className="footer-logo" />
-              <span className="footer-brand-name">EcoCycle</span>
+              <img src={Logo} alt="EcoCycle Logo" className="footer-Logo" />  
             </div>
             <p className="footer-description">
               Revolucionamos el reciclaje con tecnología inteligente. Conectamos

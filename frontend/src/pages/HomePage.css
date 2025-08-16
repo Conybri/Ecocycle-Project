@@ -38,6 +38,7 @@
   font-weight: 700; /* font-bold */
   color: #1f2937; /* text-gray-800 */
   margin-bottom: 1rem; /* mb-4 */
+  margin-top: 2rem; /* mt-8 */
 }
 
 .text-green {
