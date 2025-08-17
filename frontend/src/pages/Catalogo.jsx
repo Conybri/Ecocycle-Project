@@ -91,7 +91,7 @@ const Catalogo = () => {
       <div className="container">
         <div className="catalogo-header">
           <h1>Catálogo de Materiales Reciclables</h1>
-          <p>Descubre todos los materiales que puedes reciclar y los puntos que ganarás</p>
+          <p>Descubre todos los materiales que puedes reciclar y su valor en puntos</p>
         </div>
 
         <div className="search-section">

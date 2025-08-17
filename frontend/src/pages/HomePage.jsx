@@ -41,10 +41,10 @@ const HomePage = () => {
           </p>
           <div className="button-container">
             <button
-              onClick={() => navigate("/reciclar")}
+              onClick={() => navigate("/empresas")}
               className="btn btn-primary"
             >
-              Comenzar Ahora
+              Soy una Empresa
             </button>
             <button
               onClick={() => navigate("/catalogo")}

@@ -69,9 +69,7 @@ const Navbar = () => {
           <Link to="/blog" className="nav-link">
             Blog
           </Link>
-          <Link to="/empresas" className="nav-link">
-            Empresas
-          </Link>
+          
           <Link to="/perfil" className="nav-link">
             Perfil
           </Link>
