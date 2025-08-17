@@ -49,11 +49,15 @@ const Navbar = () => {
           <Link
             to="/"
             className="nav-link"
-            onClick={(e) => handleNavClick(e, "#inicio")}
+            onClick={(e) => handleNavClick(e, ".hero-section")}
           >
             Inicio
           </Link>
-          <Link to="/como-funciona" className="nav-link">
+          <Link
+            to="/"
+            className="nav-link"
+            onClick={(e) => handleNavClick(e, ".how-it-works-section")}
+          >
             Cómo Funciona
           </Link>
           <Link to="/catalogo" className="nav-link">
