@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
+import "../assets/img/reciclaje.jpg"; // Import your image if needed
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -13,16 +14,19 @@ const HomePage = () => {
   const faqData = [
     {
       question: "¿Qué tipo de materiales puedo reciclar?",
-      answer: "Aceptamos una amplia variedad de materiales reciclables incluyendo plástico, vidrio, papel, cartón, metal, electrónicos y textiles. Cada material tiene sus propias especificaciones de reciclaje."
+      answer:
+        "Aceptamos una amplia variedad de materiales reciclables incluyendo plástico, vidrio, papel, cartón, metal, electrónicos y textiles. Cada material tiene sus propias especificaciones de reciclaje.",
     },
     {
       question: "¿Tiene algún costo para el usuario?",
-      answer: "El registro y uso básico de EcoCycle es completamente gratuito. Solo pagas por los servicios de recolección de las empresas, que varían según el material y la cantidad."
+      answer:
+        "El registro y uso básico de EcoCycle es completamente gratuito. Solo pagas por los servicios de recolección de las empresas, que varían según el material y la cantidad.",
     },
     {
       question: "¿Cómo se canjean los puntos que gano?",
-      answer: "Los puntos se pueden canjear en nuestra tienda de recompensas por productos ecológicos, descuentos en servicios, donaciones a causas ambientales y más beneficios exclusivos."
-    }
+      answer:
+        "Los puntos se pueden canjear en nuestra tienda de recompensas por productos ecológicos, descuentos en servicios, donaciones a causas ambientales y más beneficios exclusivos.",
+    },
   ];
 
   return (
@@ -33,11 +37,14 @@ const HomePage = () => {
           <h1>
             Conoce <span className="text-green">EcoCycle</span>
           </h1>
-          <h2 className="hero-subtitle">Transformando el futuro del reciclaje</h2>
+          <h2 className="hero-subtitle">
+            Transformando el futuro del reciclaje
+          </h2>
           <p className="hero-description">
-            En EcoCycle, creemos que cada pequeña acción puede generar un gran impacto. 
-            Nuestra plataforma conecta a personas conscientes del medio ambiente con 
-            empresas de reciclaje, creando una red sostenible que beneficia a todos.
+            En EcoCycle, creemos que cada pequeña acción puede generar un gran
+            impacto. Nuestra plataforma conecta a personas conscientes del medio
+            ambiente con empresas de reciclaje, creando una red sostenible que
+            beneficia a todos.
           </p>
           <div className="button-container">
             <button
@@ -55,6 +62,108 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      {/* Carousel Section */}
+      <section className="carousel">
+        <div
+          id="controls-carousel"
+          class="relative w-full"
+          data-carousel="static"
+        >
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="../assets/img/reciclaje.jpg"
+                className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="Reciclaje"
+              />
+            </div>
+
+            <div
+              class="hidden duration-700 ease-in-out"
+              data-carousel-item="active"
+            >
+              <img
+                src="/docs/images/carousel/carousel-2.svg"
+                className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+
+            <div className="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="/docs/images/carousel/carousel-3.svg"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+
+            <div className="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="/docs/images/carousel/carousel-4.svg"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+
+            <div className="hidden duration-700 ease-in-out" data-carousel-item>
+              <img
+                src="/docs/images/carousel/carousel-5.svg"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                alt="..."
+              />
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-prev
+          >
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg
+                className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 1 1 5l4 4"
+                />
+              </svg>
+              <span className="sr-only">Previous</span>
+            </span>
+          </button>
+          <button
+            type="button"
+            className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            data-carousel-next
+          >
+            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg
+                className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 9 4-4-4-4"
+                />
+              </svg>
+              <span className="sr-only">Next</span>
+            </span>
+          </button>
+        </div>
+      </section>
 
       {/* Mission, Vision, Values Section */}
       <section className="mvp-section">
@@ -63,17 +172,26 @@ const HomePage = () => {
             <div className="mvp-card">
               <div className="mvp-icon">🎯</div>
               <h3>Misión</h3>
-              <p>Facilitar el reciclaje inteligente y crear una comunidad comprometida con la sostenibilidad ambiental.</p>
+              <p>
+                Facilitar el reciclaje inteligente y crear una comunidad
+                comprometida con la sostenibilidad ambiental.
+              </p>
             </div>
             <div className="mvp-card">
               <div className="mvp-icon">👁️</div>
               <h3>Visión</h3>
-              <p>Ser la plataforma líder en reciclaje digital, transformando la manera en que el mundo gestiona sus residuos.</p>
+              <p>
+                Ser la plataforma líder en reciclaje digital, transformando la
+                manera en que el mundo gestiona sus residuos.
+              </p>
             </div>
             <div className="mvp-card">
               <div className="mvp-icon">💚</div>
               <h3>Valores</h3>
-              <p>Sostenibilidad, innovación, transparencia y compromiso con las futuras generaciones.</p>
+              <p>
+                Sostenibilidad, innovación, transparencia y compromiso con las
+                futuras generaciones.
+              </p>
             </div>
           </div>
         </div>
@@ -86,9 +204,10 @@ const HomePage = () => {
             <div className="circular-text">
               <h2>Creamos un ciclo sostenible para el futuro</h2>
               <p>
-                La economía circular es el modelo que necesitamos para un futuro sostenible. 
-                En lugar de seguir el modelo lineal de "usar y tirar", creamos un ciclo donde 
-                los materiales se reutilizan, reciclan y regeneran continuamente.
+                La economía circular es el modelo que necesitamos para un futuro
+                sostenible. En lugar de seguir el modelo lineal de "usar y
+                tirar", creamos un ciclo donde los materiales se reutilizan,
+                reciclan y regeneran continuamente.
               </p>
             </div>
             <div className="circular-features">
@@ -131,13 +250,15 @@ const HomePage = () => {
           <div className="how-it-works-header">
             <h2>Reciclar con EcoCycle es Fácil y Gratificante</h2>
             <p>
-              Transformamos el reciclaje en una experiencia simple, rewarding y accesible para todos. 
-              Con nuestra plataforma, conectas directamente con empresas de reciclaje certificadas, 
-              ganas puntos por cada material reciclado y contribuyes activamente a un futuro más sostenible.
+              Transformamos el reciclaje en una experiencia simple, rewarding y
+              accesible para todos. Con nuestra plataforma, conectas
+              directamente con empresas de reciclaje certificadas, ganas puntos
+              por cada material reciclado y contribuyes activamente a un futuro
+              más sostenible.
             </p>
             <div className="process-icon">🌍♻️🌱</div>
           </div>
-          
+
           <div className="process-section">
             <h3>Tu Viaje de Reciclaje en 5 Pasos</h3>
             <div className="process-steps">
@@ -145,31 +266,46 @@ const HomePage = () => {
                 <div className="step-number">1</div>
                 <div className="step-icon">👤</div>
                 <h4>Regístrate y Explora</h4>
-                <p>Crea tu cuenta gratuita en EcoCycle y descubre todas las opciones de reciclaje disponibles en tu área.</p>
+                <p>
+                  Crea tu cuenta gratuita en EcoCycle y descubre todas las
+                  opciones de reciclaje disponibles en tu área.
+                </p>
               </div>
               <div className="process-step">
                 <div className="step-number">2</div>
                 <div className="step-icon">🗑️</div>
                 <h4>Selecciona tus Residuos</h4>
-                <p>Navega por nuestro catálogo de materiales reciclables y selecciona los que tienes disponibles para reciclar.</p>
+                <p>
+                  Navega por nuestro catálogo de materiales reciclables y
+                  selecciona los que tienes disponibles para reciclar.
+                </p>
               </div>
               <div className="process-step">
                 <div className="step-number">3</div>
                 <div className="step-icon">🚛</div>
                 <h4>Elige una Empresa</h4>
-                <p>Selecciona la empresa de reciclaje más conveniente para ti, basándote en ubicación, precios y reputación.</p>
+                <p>
+                  Selecciona la empresa de reciclaje más conveniente para ti,
+                  basándote en ubicación, precios y reputación.
+                </p>
               </div>
               <div className="process-step">
                 <div className="step-number">4</div>
                 <div className="step-icon">📅</div>
                 <h4>Agenda la Recolección</h4>
-                <p>Programa una fecha y hora conveniente para que recojan tus materiales reciclables directamente en tu ubicación.</p>
+                <p>
+                  Programa una fecha y hora conveniente para que recojan tus
+                  materiales reciclables directamente en tu ubicación.
+                </p>
               </div>
               <div className="process-step">
                 <div className="step-number">5</div>
                 <div className="step-icon">🏆</div>
                 <h4>Gana Puntos y Recompensas</h4>
-                <p>Recibe puntos por cada kilogramo reciclado y canjéalos por productos ecológicos, descuentos y más beneficios.</p>
+                <p>
+                  Recibe puntos por cada kilogramo reciclado y canjéalos por
+                  productos ecológicos, descuentos y más beneficios.
+                </p>
               </div>
             </div>
           </div>
@@ -183,14 +319,18 @@ const HomePage = () => {
           <div className="faq-list">
             {faqData.map((faq, index) => (
               <div key={index} className="faq-item">
-                <button 
+                <button
                   className="faq-question"
                   onClick={() => toggleFAQ(index)}
                 >
                   {faq.question}
-                  <span className="faq-icon">{openFAQ === index ? '−' : '+'}</span>
+                  <span className="faq-icon">
+                    {openFAQ === index ? "−" : "+"}
+                  </span>
                 </button>
-                <div className={`faq-answer ${openFAQ === index ? 'open' : ''}`}>
+                <div
+                  className={`faq-answer ${openFAQ === index ? "open" : ""}`}
+                >
                   <p>{faq.answer}</p>
                 </div>
               </div>
@@ -235,8 +375,9 @@ const HomePage = () => {
             <div className="testimonial-card">
               <div className="testimonial-stars">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "EcoCycle ha cambiado mi forma de ver el reciclaje. Ahora es fácil, 
-                rewarding y siento que realmente estoy contribuyendo al planeta."
+                "EcoCycle ha cambiado mi forma de ver el reciclaje. Ahora es
+                fácil, rewarding y siento que realmente estoy contribuyendo al
+                planeta."
               </p>
               <div className="testimonial-author">
                 <strong>María González</strong>
@@ -246,7 +387,7 @@ const HomePage = () => {
             <div className="testimonial-card">
               <div className="testimonial-stars">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "Como empresa, EcoCycle nos ayudó a conectar con más clientes 
+                "Como empresa, EcoCycle nos ayudó a conectar con más clientes
                 comprometidos con el medio ambiente. Excelente plataforma."
               </p>
               <div className="testimonial-author">
@@ -257,8 +398,8 @@ const HomePage = () => {
             <div className="testimonial-card">
               <div className="testimonial-stars">⭐⭐⭐⭐⭐</div>
               <p className="testimonial-text">
-                "Los puntos y recompensas hacen que reciclar sea divertido. 
-                Mis hijos también se han unido a la causa."
+                "Los puntos y recompensas hacen que reciclar sea divertido. Mis
+                hijos también se han unido a la causa."
               </p>
               <div className="testimonial-author">
                 <strong>Carlos Ruiz</strong>
@@ -274,8 +415,8 @@ const HomePage = () => {
         <div className="container">
           <h2>¿Listo para empezar?</h2>
           <p>
-            Únete a miles de personas que ya están transformando el mundo, 
-            un reciclaje a la vez.
+            Únete a miles de personas que ya están transformando el mundo, un
+            reciclaje a la vez.
           </p>
           <div className="button-container">
             <button
