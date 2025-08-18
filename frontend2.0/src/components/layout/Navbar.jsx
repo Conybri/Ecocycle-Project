@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
+import Dropdown from "react-bootstrap/Dropdown";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/Navbar.css";
 import Logo from "../../assets/img/Logo.webp";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { user, logout } = useAuth();
   const location = useLocation();
 
@@ -21,6 +26,11 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setShowModal(false);
   };
 
   const handleNavClick = (e, targetId) => {
@@ -70,18 +80,24 @@ const Navbar = () => {
           <Link to="/blog" className="nav-link">
             Blog
           </Link>
-          {user && (
-            <Link to="/perfil" className="nav-link">
-              Perfil
-            </Link>
-          )}
         </nav>
 
         <div className="nav-buttons">
           {user ? (
-            <button onClick={logout} className="btn btn-outline-red">
-              Cerrar Sesión
-            </button>
+            <Dropdown>
+              <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                {user.nombre}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="/perfil">
+                  Perfil
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setShowModal(true)}>
+                  Cerrar Sesión
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           ) : (
             <>
               <Link to="/login" className="btn btn-outline">
@@ -104,6 +120,23 @@ const Navbar = () => {
           <span></span>
         </button>
       </div>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>¿Quieres cerrar sesión?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Tu sesión se cerrará y volverás a la pantalla de inicio de sesión.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={handleLogout}>
+            Salir
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </header>
   );
 };
