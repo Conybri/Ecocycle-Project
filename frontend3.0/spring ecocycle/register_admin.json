@@ -1,0 +1,8 @@
+{
+  "nombre": "Admin",
+  "apellido": "User",
+  "email": "admin@example.com",
+  "password": "adminpassword",
+  "ciudad": "AdminCity",
+  "role": "ADMIN"
+}
