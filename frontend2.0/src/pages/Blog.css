@@ -1,5 +1,3 @@
-
-
 .blog-page {
   background-color: var(--green-secondary);
   min-height: 100vh;
@@ -156,6 +154,7 @@
   background: linear-gradient(135deg, var(--green-primary) 0%, #047857 100%);
   border-radius: 1rem;
   padding: 2rem;
+  height: auto;
   text-align: center;
   color: var(--white);
 }
@@ -214,35 +213,35 @@
   .blog-header h1 {
     font-size: 2rem;
   }
-  
+
   .blog-content {
     gap: 2rem;
   }
-  
+
   .articles-section {
     padding: 1.5rem;
   }
-  
+
   .articles-section h2 {
     font-size: 1.5rem;
   }
-  
+
   .articles-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .article-card {
     padding: 1rem;
   }
-  
+
   .newsletter-section {
     padding: 1.5rem;
   }
-  
+
   .newsletter-form {
     flex-direction: column;
   }
-  
+
   .newsletter-input,
   .newsletter-btn {
     width: 100%;
@@ -253,33 +252,33 @@
   .blog-page {
     padding-top: 1rem;
   }
-  
+
   .blog-header {
     margin-bottom: 2rem;
   }
-  
+
   .blog-header h1 {
     font-size: 1.75rem;
   }
-  
+
   .articles-section {
     padding: 1rem;
   }
-  
+
   .article-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .article-actions {
     justify-content: center;
   }
-  
+
   .visit-btn {
     width: 100%;
   }
-  
+
   .newsletter-section {
     padding: 1rem;
   }

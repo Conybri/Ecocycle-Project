@@ -8,6 +8,7 @@
 .profile-container {
   max-width: 900px;
   margin: 0 auto;
+  margin-top: 5rem;
   padding: 0 1rem;
   display: grid;
   gap: 1.5rem;

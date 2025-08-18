@@ -112,7 +112,7 @@
 
 .btn-outline-red:hover {
   background-color: var(--red-primary);
-  color: white;
+  color: red;
 }
 
 .btn-large {
