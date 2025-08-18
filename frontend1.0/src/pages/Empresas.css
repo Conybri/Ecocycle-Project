@@ -1,0 +1,363 @@
+:root {
+  --green-primary: #16a34a;
+  --green-secondary: #dcfce7;
+  --blue-primary: #3b82f6;
+  --gray-text: #4b5563;
+  --gray-light: #f3f4f6;
+  --white: #ffffff;
+}
+
+.empresas-page {
+  background-color: var(--gray-light);
+  min-height: 100vh;
+  padding-top: 6rem; /* Adjusted to account for fixed navbar */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Hero Section */
+.hero-empresas {
+  background-color: var(--green-primary);
+  color: var(--white);
+  text-align: center;
+  padding: 4rem 0;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+}
+
+.hero-empresas h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero-empresas p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.hero-empresas .btn {
+  background-color: var(--white);
+  color: var(--green-primary);
+  padding: 0.8rem 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.hero-empresas .btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Why Partner Section */
+.why-partner-section {
+  padding: 3rem 0;
+  background-color: var(--white);
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.why-partner-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 3rem;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-card {
+  background-color: var(--green-secondary);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+}
+
+.benefit-card .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.benefit-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.benefit-card p {
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* How It Works Section */
+.how-it-works-empresas {
+  padding: 3rem 0;
+  background-color: var(--white);
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.how-it-works-empresas h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 3rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.step-card {
+  background-color: var(--gray-light);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+}
+
+.step-number {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--blue-primary);
+  color: var(--white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border: 3px solid var(--white);
+}
+
+.step-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.step-card p {
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+  padding: 3rem 0;
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form-section > p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #374151;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.features-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.features-list span {
+  background-color: var(--green-secondary);
+  color: var(--green-primary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #1f2937;
+  background-color: var(--gray-light);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--green-primary);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+.contact-form .btn-primary {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero-empresas h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-empresas {
+    padding: 3rem 0;
+  }
+
+  .hero-empresas h1 {
+    font-size: 2rem;
+  }
+
+  .hero-empresas p {
+    font-size: 1rem;
+  }
+
+  .why-partner-section,
+  .how-it-works-empresas,
+  .contact-form-section {
+    padding: 2rem 0;
+  }
+
+  .why-partner-section h2,
+  .how-it-works-empresas h2,
+  .contact-form-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .benefits-grid,
+  .steps-grid {
+    gap: 1.5rem;
+  }
+
+  .benefit-card,
+  .step-card {
+    padding: 1.5rem;
+  }
+
+  .features-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-empresas {
+    padding: 2rem 0;
+  }
+
+  .hero-empresas h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-empresas p {
+    font-size: 0.9rem;
+  }
+
+  .hero-empresas .btn {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  .why-partner-section h2,
+  .how-it-works-empresas h2,
+  .contact-form-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .benefit-card,
+  .step-card {
+    padding: 1rem;
+  }
+
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .contact-form {
+    padding: 0 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .contact-form .btn-primary {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}

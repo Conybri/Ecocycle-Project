@@ -1,0 +1,30 @@
+meta {
+  name: crear usuario
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/usuarios
+  body: json
+  auth: inherit
+}
+
+params:query {
+  : 
+}
+
+body:json {
+  
+  
+   {
+           "nombre": "juan",
+             "apellido": "Perez",
+            "email": "carlos.pen4@example.com",
+            "password": "password123"
+          }
+}
+
+settings {
+  encodeUrl: true
+}
