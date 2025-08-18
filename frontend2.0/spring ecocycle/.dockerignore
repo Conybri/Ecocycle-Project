@@ -1,0 +1,22 @@
+# Ignora la carpeta de compilación
+target/
+
+# Ignora archivos y carpetas de configuración del sistema
+*.iml
+.idea/
+*.log
+
+# Ignora Git
+.git
+.gitignore
+
+# Ignora configuración local de Maven
+.settings/
+.classpath
+.project
+*.swp
+*.swo
+
+# Otros comunes
+*.DS_Store
+.env
