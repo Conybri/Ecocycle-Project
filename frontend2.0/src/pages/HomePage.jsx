@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from "react-bootstrap/Carousel";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -62,7 +62,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Carousel Section */}
       <section className="carousel-section">
         <Carousel>
@@ -72,10 +72,6 @@ const HomePage = () => {
               src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg"
               alt="First slide"
             />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Some representative placeholder content for the first slide.</p>
-            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
@@ -83,10 +79,6 @@ const HomePage = () => {
               src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg"
               alt="Second slide"
             />
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
@@ -94,10 +86,6 @@ const HomePage = () => {
               src="https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg"
               alt="Third slide"
             />
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
       </section>
