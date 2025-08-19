@@ -11,7 +11,6 @@ const Profile = () => {
   }
 
   // Placeholder data for sections not yet implemented in backend
-  const ecoWarriorSince = "Enero 2024"; // Placeholder
   const memberSince = user.fechaRegistro
     ? new Date(user.fechaRegistro).toLocaleDateString("es-CL", {
         year: "numeric",
@@ -19,7 +18,7 @@ const Profile = () => {
         day: "numeric",
       })
     : "N/A";
-  const address = "Av. Providencia 1234, Providencia, Santiago, Chile"; // Placeholder
+  const address = user.ciudad || "Ciudad no especificada"; // Use user's city
   const pointsToNextLevel = 250; // Placeholder
 
   const recyclingStats = {
@@ -64,9 +63,7 @@ const Profile = () => {
           <h2 className="profile-name">
             {user.nombre} {user.apellido}
           </h2>
-          <p className="profile-eco-warrior">
-            Eco-Warrior desde {ecoWarriorSince}
-          </p>
+
           <p className="profile-address">{address}</p>
           <p className="profile-member-since">Miembro desde {memberSince}</p>
         </div>
