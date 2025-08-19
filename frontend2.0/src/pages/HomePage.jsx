@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
-import "./HomePage.css";
+import "../styles/HomePage.css";
 
 const HomePage = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Empresas.css";
+import "../styles/Empresas.css";
 
 const Empresas = () => {
   const [companyName, setCompanyName] = useState("");

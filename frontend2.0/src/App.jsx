@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/common/ScrollToTop"; // Import the new component
 
 import Navbar from "./components/layout/Navbar";
 import HomePage from "./pages/HomePage";
@@ -12,7 +13,8 @@ import Signup from "./auth/Signup"; // Import for Signup
 import Profile from "./pages/Profile"; // Import for Profile
 import ForgotPassword from "./auth/ForgotPassword"; // Import for ForgotPassword
 import Footer from "./components/layout/Footer";
-import "./App.css";
+import ScrollToTopButton from "./components/common/ScrollToTopButton"; // Import the new component
+import "./styles/App.css";
 
 // Componentes temporales para las páginas faltantes
 const ComoFunciona = () => (
@@ -25,6 +27,7 @@ const ComoFunciona = () => (
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/* Add the ScrollToTop component here */}
       <Navbar />
       <main>
         <Routes>
@@ -41,6 +44,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <ScrollToTopButton /> {/* Add the ScrollToTopButton component here */}
     </Router>
   );
 }
