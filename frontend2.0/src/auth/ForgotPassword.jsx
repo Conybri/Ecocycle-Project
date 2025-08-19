@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Auth.css'; // Reutilizar los estilos de autenticación
+import '../styles/Auth.css'; // Reutilizar los estilos de autenticación
 import { forgotPasswordRequest } from '../services/api';
 
 const ForgotPassword = () => {

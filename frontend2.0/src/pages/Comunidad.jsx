@@ -1,5 +1,5 @@
 import React from "react";
-import "./Comunidad.css";
+import "../styles/Comunidad.css";
 
 const Comunidad = () => {
   const topRecyclers = [
