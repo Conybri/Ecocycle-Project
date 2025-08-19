@@ -34,3 +34,12 @@ export const getProducts = async () => {
   const response = await fetch(`${API_URL}/products`);
   return response.json();
 };
+
+export const forgotPasswordRequest = async (email) => {
+  const response = await fetch(`${API_URL}/auth/forgot-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  return response.json();
+};

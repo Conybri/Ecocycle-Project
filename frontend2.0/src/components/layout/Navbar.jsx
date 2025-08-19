@@ -80,35 +80,34 @@ const Navbar = () => {
           <Link to="/blog" className="nav-link">
             Blog
           </Link>
+          <div className="nav-buttons">
+            {user ? (
+              <Dropdown>
+                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                  {user.nombre}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/perfil">
+                    Perfil
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setShowModal(true)}>
+                    Cerrar Sesión
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : (
+              <>
+                <Link to="/login" className="btn btn-outline">
+                  Iniciar Sesión
+                </Link>
+                <Link to="/register" className="btn btn-primary">
+                  Registrarse
+                </Link>
+              </>
+            )}
+          </div>
         </nav>
-
-        <div className="nav-buttons">
-          {user ? (
-            <Dropdown>
-              <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                {user.nombre}
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/perfil">
-                  Perfil
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setShowModal(true)}>
-                  Cerrar Sesión
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            <>
-              <Link to="/login" className="btn btn-outline">
-                Iniciar Sesión
-              </Link>
-              <Link to="/register" className="btn btn-primary">
-                Registrarse
-              </Link>
-            </>
-          )}
-        </div>
 
         <button
           className="mobile-menu-btn"

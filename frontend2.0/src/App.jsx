@@ -10,6 +10,7 @@ import Empresas from "./pages/Empresas";
 import Login from "./auth/Login"; // Correct import for Login
 import Signup from "./auth/Signup"; // Import for Signup
 import Profile from "./pages/Profile"; // Import for Profile
+import ForgotPassword from "./auth/ForgotPassword"; // Import for ForgotPassword
 import Footer from "./components/layout/Footer";
 import "./App.css";
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/perfil" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </main>
       <Footer />
