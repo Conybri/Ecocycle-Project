@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
@@ -12,13 +12,16 @@ import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import ForgotPassword from "./auth/ForgotPassword";
 import Profile from "./pages/Profile";
+import LogoutModal from "./components/layout/LogoutModal"; // Importa el modal
 
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   return (
     <>
-      <Navbar />
+      <Navbar setShowLogoutModal={setShowLogoutModal} />
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -34,6 +37,11 @@ function App() {
       </main>
       <Footer />
       <ScrollToTop />
+      {/* Renderiza el modal aquí, fuera del Navbar, y pásale el estado y la función para cerrarlo */}
+      <LogoutModal
+        show={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+      />
     </>
   );
 }
