@@ -45,32 +45,32 @@ const HomePage = () => {
   const goTo = (index) => setActiveIndex(index);
 
   return (
-    <div className="bg-green-50">
+    <div className="bg-green-50 min-h-screen">
       {/* Hero Section */}
-      <section className="pt-20 mt-12 pb-12 text-center lg:pt-24 lg:pb-24">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4 mt-8">
-            Conoce <span className="text-green-600">EcoCycle</span>
+      <section className="relative pt-16 sm:pt-20 mt-8 sm:mt-12 pb-8 sm:pb-12 text-center lg:pt-24 lg:pb-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-4 mt-4 sm:mt-8">
+            Conoce <span className="text-green-600 inline-block hover:scale-105 transition-transform">EcoCycle</span>
           </h1>
-          <h2 className="text-2xl lg:text-3xl font-semibold text-gray-600 mb-6">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-600 mb-4 sm:mb-6">
             Transformando el futuro del reciclaje
           </h2>
-          <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto">
             En EcoCycle, creemos que cada pequeña acción puede generar un gran
             impacto. Nuestra plataforma conecta a personas conscientes del medio
             ambiente con empresas de reciclaje, creando una red sostenible que
             beneficia a todos.
           </p>
-          <div className="flex justify-center gap-4 flex-wrap">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
             <button
               onClick={() => navigate("/empresas")}
-              className="font-bold py-3 px-8 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors"
+              className="w-full sm:w-auto font-bold py-2 sm:py-3 px-4 sm:px-8 rounded-md sm:rounded-lg bg-green-600 text-white hover:bg-green-700 transition-all hover:scale-105 duration-300 text-sm sm:text-base max-w-[200px]"
             >
               Soy una Empresa
             </button>
             <button
               onClick={() => navigate("/catalogo")}
-              className="font-bold py-3 px-8 rounded-lg bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-100 transition-colors"
+              className="w-full sm:w-auto font-bold py-2 sm:py-3 px-4 sm:px-8 rounded-md sm:rounded-lg bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-100 transition-all hover:scale-105 duration-300 text-sm sm:text-base max-w-[200px]"
             >
               Ver Catálogo
             </button>
@@ -79,8 +79,8 @@ const HomePage = () => {
       </section>
 
       {/* Carousel Section */}
-      <section className="py-12 bg-green-50">
-        <div className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-xl shadow-md">
+      <section className="py-8 sm:py-12 lg:py-16 bg-green-50">
+        <div className="relative w-full max-w-sm sm:max-w-2xl lg:max-w-4xl mx-auto overflow-hidden rounded-xl shadow-lg">
           <div
             className="whitespace-nowrap transition-transform duration-700"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -90,11 +90,11 @@ const HomePage = () => {
                 key={src}
                 src={src}
                 alt={`Slide ${idx + 1}`}
-                className="inline-block w-full h-auto align-top"
+                className="inline-block w-full h-48 sm:h-64 lg:h-[400px] object-cover align-top"
               />
             ))}
           </div>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
             {slides.map((_, idx) => (
               <button
                 key={idx}
@@ -108,29 +108,29 @@ const HomePage = () => {
       </section>
 
       {/* Mission, Vision, Values Section */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div className="p-8 bg-green-100 rounded-xl shadow-sm hover:transform hover:-translate-y-1 transition-transform">
-              <div className="text-5xl mb-4">🎯</div>
-              <h3 className="font-bold text-2xl mb-4 text-gray-800">Misión</h3>
-              <p className="text-gray-700 leading-relaxed">
+      <section className="py-8 sm:py-12 lg:py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-center">
+            <div className="p-6 sm:p-8 bg-green-100 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl sm:text-5xl mb-4 transform hover:scale-110 transition-transform cursor-default">🎯</div>
+              <h3 className="font-bold text-xl sm:text-2xl mb-3 sm:mb-4 text-gray-800">Misión</h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Facilitar el reciclaje inteligente y crear una comunidad
                 comprometida con la sostenibilidad ambiental.
               </p>
             </div>
-            <div className="p-8 bg-green-100 rounded-xl shadow-sm hover:transform hover:-translate-y-1 transition-transform">
-              <div className="text-5xl mb-4">👁️</div>
-              <h3 className="font-bold text-2xl mb-4 text-gray-800">Visión</h3>
-              <p className="text-gray-700 leading-relaxed">
+            <div className="p-6 sm:p-8 bg-green-100 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl sm:text-5xl mb-4 transform hover:scale-110 transition-transform cursor-default">👁️</div>
+              <h3 className="font-bold text-xl sm:text-2xl mb-3 sm:mb-4 text-gray-800">Visión</h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Ser la plataforma líder en reciclaje digital, transformando la
                 manera en que el mundo gestiona sus residuos.
               </p>
             </div>
-            <div className="p-8 bg-green-100 rounded-xl shadow-sm hover:transform hover:-translate-y-1 transition-transform">
-              <div className="text-5xl mb-4">💚</div>
-              <h3 className="font-bold text-2xl mb-4 text-gray-800">Valores</h3>
-              <p className="text-gray-700 leading-relaxed">
+            <div className="p-6 sm:p-8 bg-green-100 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="text-4xl sm:text-5xl mb-4 transform hover:scale-110 transition-transform cursor-default">💚</div>
+              <h3 className="font-bold text-xl sm:text-2xl mb-3 sm:mb-4 text-gray-800">Valores</h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Sostenibilidad, innovación, transparencia y compromiso con las
                 futuras generaciones.
               </p>
@@ -140,45 +140,45 @@ const HomePage = () => {
       </section>
 
       {/* Circular Economy Section */}
-      <section className="py-12 bg-green-50">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="py-8 sm:py-12 lg:py-16 bg-green-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-content">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">Creamos un ciclo sostenible para el futuro</h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">Creamos un ciclo sostenible para el futuro</h2>
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                 La economía circular es el modelo que necesitamos para un futuro
                 sostenible. En lugar de seguir el modelo lineal de "usar y
                 tirar", creamos un ciclo donde los materiales se reutilizan,
                 reciclan y regeneran continuamente.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
-                    <div className="text-4xl flex-shrink-0">♻️</div>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="text-3xl sm:text-4xl flex-shrink-0 transform hover:scale-110 transition-transform cursor-default">♻️</div>
                     <div>
-                        <h4 className="font-semibold text-lg mb-2 text-gray-800">Reutilización</h4>
-                        <p className="text-gray-700">Damos nueva vida a los materiales</p>
+                        <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2 text-gray-800">Reutilización</h4>
+                        <p className="text-sm sm:text-base text-gray-700">Damos nueva vida a los materiales</p>
                     </div>
                 </div>
-                <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
-                    <div className="text-4xl flex-shrink-0">🌱</div>
+                <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="text-3xl sm:text-4xl flex-shrink-0 transform hover:scale-110 transition-transform cursor-default">🌱</div>
                     <div>
-                        <h4 className="font-semibold text-lg mb-2 text-gray-800">Regeneración</h4>
-                        <p className="text-gray-700">Restauramos el equilibrio natural</p>
+                        <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2 text-gray-800">Regeneración</h4>
+                        <p className="text-sm sm:text-base text-gray-700">Restauramos el equilibrio natural</p>
                     </div>
                 </div>
-                <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
-                    <div className="text-4xl flex-shrink-0">👥</div>
+                <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="text-3xl sm:text-4xl flex-shrink-0 transform hover:scale-110 transition-transform cursor-default">👥</div>
                     <div>
-                        <h4 className="font-semibold text-lg mb-2 text-gray-800">Comunidad</h4>
-                        <p className="text-gray-700">Conectamos personas y empresas</p>
+                        <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2 text-gray-800">Comunidad</h4>
+                        <p className="text-sm sm:text-base text-gray-700">Conectamos personas y empresas</p>
                     </div>
                 </div>
-                <div className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm">
-                    <div className="text-4xl flex-shrink-0">💡</div>
+                <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div className="text-3xl sm:text-4xl flex-shrink-0 transform hover:scale-110 transition-transform cursor-default">💡</div>
                     <div>
-                        <h4 className="font-semibold text-lg mb-2 text-gray-800">Innovación</h4>
-                        <p className="text-gray-700">Desarrollamos soluciones creativas</p>
+                        <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2 text-gray-800">Innovación</h4>
+                        <p className="text-sm sm:text-base text-gray-700">Desarrollamos soluciones creativas</p>
                     </div>
                 </div>
             </div>
@@ -187,28 +187,28 @@ const HomePage = () => {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Reciclar con EcoCycle es Fácil y Gratificante</h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+      <section id="how-it-works" className="py-8 sm:py-12 lg:py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">Reciclar con EcoCycle es Fácil y Gratificante</h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto mb-6 sm:mb-8">
               Transformamos el reciclaje en una experiencia simple, gratificante y
               accesible para todos. Con nuestra plataforma, conectas
               directamente con empresas de reciclaje certificadas, ganas puntos
               por cada material reciclado y contribuyes activamente a un futuro
               más sostenible.
             </p>
-            <div className="text-5xl mb-4">🌍♻️🌱</div>
+            <div className="text-4xl sm:text-5xl mb-4 space-x-2">🌍♻️🌱</div>
           </div>
 
           <div className="text-center">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-8">Tu Viaje de Reciclaje en 5 Pasos</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
-                <div className="text-center p-6 bg-green-100 rounded-xl shadow-sm relative hover:transform hover:-translate-y-1 transition-transform">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
-                    <div className="text-5xl my-5">👤</div>
-                    <h4 className="font-semibold text-xl mb-4">Regístrate y Explora</h4>
-                    <p className="text-gray-700 leading-relaxed">Crea tu cuenta gratuita y descubre las opciones de reciclaje en tu área.</p>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 mb-6 sm:mb-8">Tu Viaje de Reciclaje en 5 Pasos</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
+                <div className="text-center p-4 sm:p-6 bg-green-100 rounded-xl shadow-sm relative hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                    <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-base sm:text-lg">1</div>
+                    <div className="text-4xl sm:text-5xl my-4 sm:my-5 transform hover:scale-110 transition-transform cursor-default">👤</div>
+                    <h4 className="font-semibold text-lg sm:text-xl mb-2 sm:mb-4">Regístrate y Explora</h4>
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">Crea tu cuenta gratuita y descubre las opciones de reciclaje en tu área.</p>
                 </div>
                 <div className="text-center p-6 bg-green-100 rounded-xl shadow-sm relative hover:transform hover:-translate-y-1 transition-transform">
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">2</div>
@@ -240,14 +240,14 @@ const HomePage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 bg-green-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Preguntas Frecuentes</h2>
-          <div className="max-w-2xl mx-auto">
+      <section className="py-8 sm:py-12 lg:py-16 bg-green-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-8 sm:mb-12">Preguntas Frecuentes</h2>
+          <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto">
             {faqData.map((faq, index) => (
-              <div key={index} className="mb-4 bg-white rounded-lg shadow-sm overflow-hidden">
+              <div key={index} className="mb-3 sm:mb-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                 <button
-                  className="w-full p-6 text-left text-lg font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-50 transition-colors"
+                  className="w-full p-4 sm:p-6 text-left text-base sm:text-lg font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-50 transition-colors"
                   onClick={() => toggleFAQ(index)}
                 >
                   {faq.question}

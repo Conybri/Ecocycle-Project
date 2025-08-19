@@ -54,9 +54,22 @@ const Navbar = () => {
   ];
 
   const NavLinksComponent = ({ isMobile }) => (
-    <nav className={isMobile ? "flex flex-col gap-4" : "hidden lg:flex items-center gap-8"}>
+    <nav className={isMobile ? "flex flex-col gap-4" : "hidden lg:flex items-center gap-4 xl:gap-8"}>
       {navLinks.map((link) => (
-        <Link key={link.text} to={link.to} onClick={link.action} className="font-semibold text-gray-600 hover:text-green-600 transition-colors p-2 rounded-md">
+        <Link 
+          key={link.text} 
+          to={link.to} 
+          onClick={link.action} 
+          className={`font-semibold transition-colors rounded-md ${
+            isScrolled
+              ? 'text-sm lg:text-base p-2'
+              : 'text-base lg:text-lg p-2 lg:p-3'
+          } ${
+            location.pathname === link.to
+              ? 'text-green-600 bg-green-50/80'
+              : 'text-gray-600 hover:text-green-600 hover:bg-green-50/50'
+          }`}
+        >
           {link.text}
         </Link>
       ))}
@@ -64,10 +77,24 @@ const Navbar = () => {
   );
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? "bg-white/95 shadow-md backdrop-blur-sm" : "bg-transparent"}`}>
-      <div className="container mx-auto px-4 flex justify-between items-center py-3">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? "bg-white shadow-md" 
+          : "bg-gradient-to-b from-white/95 via-white/75 to-transparent backdrop-blur-[1px]"
+      } ${isScrolled ? 'h-16 sm:h-20 lg:h-24' : 'h-20 sm:h-24 lg:h-32'}`}
+    >
+      <div className={`container mx-auto px-4 flex justify-between items-center h-full transition-all duration-500`}>
         <Link to="/">
-          <img src={Logo} alt="EcoCycle Logo" className="h-12" />
+          <img 
+            src={Logo} 
+            alt="EcoCycle Logo" 
+            className={`transition-all duration-300 ${
+              isScrolled 
+                ? 'h-12 sm:h-16 lg:h-20' 
+                : 'h-16 sm:h-20 lg:h-24'
+            }`} 
+          />
         </Link>
 
         <NavLinksComponent />
@@ -87,8 +114,8 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="font-semibold text-green-600 hover:text-green-700 transition-colors">Iniciar Sesión</Link>
-              <Link to="/register" className="px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-transform transform hover:scale-105">Registrarse</Link>
+              <Link to="/login" className="text-xs sm:text-sm lg:text-base font-semibold text-green-600 hover:text-green-700 transition-colors px-1.5 py-1">Iniciar Sesión</Link>
+              <Link to="/register" className="text-xs sm:text-sm lg:text-base px-2.5 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-transform transform hover:scale-105 min-w-fit">Registrarse</Link>
             </>
           )}
         </div>
@@ -109,8 +136,8 @@ const Navbar = () => {
               </div>
             ) : (
               <>
-                <Link to="/login" className="w-full text-center font-semibold text-green-600 p-2 rounded-md hover:bg-green-100 transition-colors">Iniciar Sesión</Link>
-                <Link to="/register" className="w-full text-center px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700">Registrarse</Link>
+                <Link to="/login" className="mx-auto max-w-[140px] text-center font-semibold text-green-600 p-1.5 text-sm rounded-md hover:bg-green-100 transition-colors">Iniciar Sesión</Link>
+                <Link to="/register" className="mx-auto max-w-[140px] text-center px-3 py-1.5 text-sm bg-green-600 text-white font-bold rounded-full hover:bg-green-700">Registrarse</Link>
               </>
             )}
           </div>
