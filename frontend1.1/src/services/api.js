@@ -1,45 +1,43 @@
-const API_URL = 'http://localhost:8080';
+import axios from 'axios';
 
-// User-related API calls
-export const loginUser = async (credentials) => {
-  const response = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(credentials),
-  });
-  return response.json();
-};
+const apiClient = axios.create({
+    baseURL: import.meta.env.VITE_API_BASE_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
 
-export const registerUser = async (userData) => {
-  const response = await fetch(`${API_URL}/auth/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(userData),
-  });
-  const data = await response.json();
-  return { data, status: response.status };
-};
+// Interceptor para añadir el token JWT a cada petición autenticada
+apiClient.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
-export const getUserProfile = async (token) => {
-  // The user profile is returned in the login response, so this function is not strictly necessary
-  // but it's here for completeness if you add a separate endpoint for it.
-  const response = await fetch(`${API_URL}/usuarios/profile`, { // Assuming a /profile endpoint
-    headers: { 'Authorization': `Bearer ${token}` },
-  });
-  return response.json();
-};
+// Interceptor para manejar respuestas y errores de autenticación
+apiClient.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        // Si el token ha expirado o es inválido, limpiar el localStorage
+        if (error.response?.status === 401) {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            // Solo redirigir si no estamos ya en la página de login
+            if (window.location.pathname !== '/login') {
+                window.location.href = '/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
 
-// Product-related API calls
-export const getProducts = async () => {
-  const response = await fetch(`${API_URL}/products`);
-  return response.json();
-};
-
-export const forgotPasswordRequest = async (email) => {
-  const response = await fetch(`${API_URL}/auth/forgot-password`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  });
-  return response.json();
-};
+export default apiClient;

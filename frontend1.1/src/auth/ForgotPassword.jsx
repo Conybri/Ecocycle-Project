@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { forgotPasswordRequest } from '../services/api';
+import apiClient from '../services/api';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -12,24 +12,11 @@ const ForgotPassword = () => {
     setMessage('');
     setError('');
 
-    console.log('Solicitud de restablecimiento de contraseña para:', email);
-
     try {
-      // Mocking the API call for now
-      if (email.includes('@')) {
-        setMessage('Si existe una cuenta con este correo, se ha enviado un enlace para restablecer la contraseña.');
-      } else {
-        setError('Por favor, introduce un correo electrónico válido.');
-      }
-      // const response = await forgotPasswordRequest(email);
-      // if (response.success) { 
-      //   setMessage(response.message);
-      // } else {
-      //   setError(response.message || 'No se pudo procesar la solicitud de restablecimiento de contraseña.');
-      // }
-    } catch (err) {
+      await apiClient.post('/auth/forgot-password', { email });
+      setMessage('Si existe una cuenta con este correo, se ha enviado un enlace para restablecer la contraseña.');
+    } catch {
       setError('Ocurrió un error al procesar tu solicitud. Por favor, inténtalo de nuevo.');
-      console.error('Forgot password error:', err);
     }
   };
 

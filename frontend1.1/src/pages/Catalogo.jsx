@@ -13,24 +13,6 @@ const materials = [
 
 const categories = ["Todos", "Plástico", "Electrónicos", "Textiles", "Vidrio", "Papel", "Metal"];
 
-const getCategoryIcon = (category) => {
-    switch (category) {
-        case "Plástico":
-            return <Package className="h-8 w-8" />;
-        case "Electrónicos":
-            return <Smartphone className="h-8 w-8" />;
-        case "Textiles":
-            return <Shirt className="h-8 w-8" />;
-        case "Vidrio":
-            return <Package className="h-8 w-8" />;
-        case "Papel":
-            return <Newspaper className="h-8 w-8" />;
-        case "Metal":
-            return <Cpu className="h-8 w-8" />;
-        default:
-            return <Recycle className="h-8 w-8" />;
-    }
-};
 
 const getCategoryColor = (category) => {
     switch (category) {

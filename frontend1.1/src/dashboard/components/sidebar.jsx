@@ -1,4 +1,3 @@
-"use client";
 import {
   Home,
   Package,
@@ -14,10 +13,10 @@ import {
   Shield,
   AlertTriangle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { useAuth } from "@/contexts/auth-context";
+import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
+import { cn } from "../../lib/utils";
+import { useAuth } from "../../auth/AuthContext";
 
 const menuItems = {
   ADMIN: [
@@ -116,20 +115,20 @@ export default function Sidebar({
   return (
     <div
       className={cn(
-        "bg-sidebar border-r border-sidebar-border transition-all duration-300 flex flex-col h-full",
+        "bg-white border-r border-gray-200 transition-all duration-300 flex flex-col h-full shadow-sm",
         collapsed ? "w-16" : "w-64"
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-sidebar-border flex items-center justify-between">
+      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center space-x-2">
-            <h2 className="text-xl font-bold text-sidebar-foreground">
-              ECommerce
+            <h2 className="text-xl font-bold text-gray-800">
+              EcoCycle
             </h2>
             {!isValidRole && (
               <AlertTriangle
-                className="h-4 w-4 text-destructive"
+                className="h-4 w-4 text-red-500"
                 title="Rol no válido"
               />
             )}
@@ -139,7 +138,7 @@ export default function Sidebar({
           variant="ghost"
           size="sm"
           onClick={onToggleCollapse}
-          className="text-sidebar-foreground hover:bg-sidebar-accent"
+          className="text-gray-600 hover:bg-gray-100"
         >
           {collapsed ? (
             <ChevronRight className="h-4 w-4" />
@@ -188,9 +187,9 @@ export default function Sidebar({
                 <Button
                   variant="ghost"
                   className={cn(
-                    "w-full justify-start text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all duration-200",
+                    "w-full justify-start text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200",
                     isActive &&
-                      "bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary shadow-sm",
+                      "bg-blue-primary text-white hover:bg-blue-600 shadow-sm",
                     collapsed && "justify-center px-2",
                     !hasAccess && "opacity-50 cursor-not-allowed"
                   )}

@@ -1,7 +1,6 @@
-"use client";
 
 import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/auth-context";
+import { useAuth } from "../../auth/AuthContext";
 import Sidebar from "./sidebar";
 import Header from "./header";
 import ProtectedRoute from "./protected-route";
@@ -76,7 +75,7 @@ export default function DashboardLayout({ children, user }) {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gray-light">
         <div className="flex h-screen">
           {/* Sidebar */}
           <Sidebar
