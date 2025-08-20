@@ -1,25 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import Logo from "../../assets/img/Logo.webp";
 
-// Función para obtener la primera letra del nombre y del apellido
-const getInitials = (name) => {
-  if (!name) return "";
-  const words = name.trim().split(/\s+/);
-  if (words.length === 1) {
-    return words[0][0].toUpperCase();
-  }
-  return (words[0][0] + words[words.length - 1][0]).toUpperCase();
-};
-
-const Navbar = ({ setShowLogoutModal }) => {
+const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const userMenuRef = useRef(null);
+
+  const handleLogout = () => {
+    logout();
+    setIsUserMenuOpen(false);
+    setIsMobileMenuOpen(false);
+    navigate('/');
+  };
 
   // Efecto para manejar el cambio de color al hacer scroll
   useEffect(() => {
@@ -74,9 +72,9 @@ const Navbar = ({ setShowLogoutModal }) => {
           : "hidden lg:flex items-center gap-4 xl:gap-8"
       }
     >
-      {navLinks.map((link) => (
+      {navLinks.map((link, index) => (
         <Link
-          key={link.text}
+          key={index}
           to={link.to}
           onClick={link.action}
           className={`font-semibold transition-colors rounded-md ${
@@ -123,12 +121,9 @@ const Navbar = ({ setShowLogoutModal }) => {
             <div className="relative" ref={userMenuRef}>
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 dark:bg-gray-600 rounded-full"
-                aria-label="Abrir menú de usuario"
+                className="px-6 py-2 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-all duration-200 ease-in-out transform hover:scale-105 shadow-md"
               >
-                <span className="font-medium text-gray-600 dark:text-gray-300">
-                  {getInitials(user.nombre)}
-                </span>
+                {user.nombre}
               </button>
               {isUserMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-1 border border-gray-100">
@@ -140,10 +135,7 @@ const Navbar = ({ setShowLogoutModal }) => {
                     Perfil
                   </Link>
                   <button
-                    onClick={() => {
-                      setShowLogoutModal(true);
-                      setIsUserMenuOpen(false);
-                    }}
+                    onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors duration-200"
                   >
                     Cerrar Sesión
@@ -207,10 +199,7 @@ const Navbar = ({ setShowLogoutModal }) => {
                   Perfil
                 </Link>
                 <button
-                  onClick={() => {
-                    setShowLogoutModal(true);
-                    setIsMobileMenuOpen(false);
-                  }}
+                  onClick={handleLogout}
                   className="w-fit text-center px-6 py-2 bg-red-500 text-white font-bold rounded-full hover:bg-red-600"
                 >
                   Cerrar Sesión

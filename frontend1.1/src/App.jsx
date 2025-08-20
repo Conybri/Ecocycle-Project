@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
@@ -11,14 +11,12 @@ import Empresas from "./pages/Empresas";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import ForgotPassword from "./auth/ForgotPassword";
-import Profile from "./pages/Profile";
-import Dashboard from "./pages/Dashboard";
-import LogoutModal from "./components/layout/LogoutModal"; // Importa el modal
+import Dashboard from './pages/Dashboard'; // Importa el nuevo dashboard
+import ProtectedRoute from './components/ProtectedRoute'; // Importa el componente de ruta protegida
 
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const location = useLocation();
   
   // Verificar si estamos en el dashboard
@@ -27,7 +25,7 @@ function App() {
   return (
     <>
       {/* Solo mostrar Navbar si NO estamos en el dashboard */}
-      {!isDashboard && <Navbar setShowLogoutModal={setShowLogoutModal} />}
+      {!isDashboard && <Navbar />}
       
       <main className={isDashboard ? "" : "pt-20 sm:pt-24 lg:pt-32"}>
         <Routes>
@@ -39,8 +37,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* La página de perfil ahora vive en la ruta /dashboard y está protegida */}
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </main>
       
@@ -48,11 +53,6 @@ function App() {
       {!isDashboard && <Footer />}
       
       <ScrollToTop />
-      {/* Renderiza el modal aquí, fuera del Navbar, y pásale el estado y la función para cerrarlo */}
-      <LogoutModal
-        show={showLogoutModal}
-        onClose={() => setShowLogoutModal(false)}
-      />
     </>
   );
 }

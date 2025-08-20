@@ -28,7 +28,6 @@ const Empresas = () => {
       alert("Debes aceptar los términos y condiciones.");
       return;
     }
-    console.log({ companyName, rut, contactName, position, email, phone, address, materials, capacity, description });
     alert("Solicitud enviada con éxito!");
     // Reset form
     setCompanyName("");

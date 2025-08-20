@@ -30,19 +30,16 @@ const Signup = () => {
 
     const userData = { nombre, apellido, email, ciudad, password };
     try {
-      const { data, status } = await register(userData);
-
-      if (status === 200) {
-        alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-        navigate('/login');
-      } else if (status === 409) {
+      await register(userData);
+      alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+      navigate('/login');
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || 'Ocurrió un error al intentar registrarse.';
+      if (err.response?.status === 409) {
         setError('El correo electrónico ya está registrado.');
       } else {
-        setError(data.message || 'Ocurrió un error al intentar registrarse.');
+        setError(errorMessage);
       }
-    } catch (err) {
-      setError('Ocurrió un error al intentar registrarse. Por favor, inténtalo de nuevo.');
-      console.error('Registration error:', err);
     }
   };
 

@@ -1,21 +1,19 @@
-"use client"
-
-import { useAuth } from "@/contexts/auth-context"
+import { useAuth } from "../../auth/AuthContext"
 import { AlertTriangle, Shield } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
+import { Button } from "../../components/ui/button"
 
 export default function ProtectedRoute({ children, requiredRole = null, fallbackMessage = null }) {
   const { user, hasRole, loading } = useAuth()
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center bg-gray-light">
         <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-primary mx-auto"></div>
           <div className="space-y-2">
             <p className="text-lg font-medium">Verificando acceso...</p>
-            <p className="text-sm text-muted-foreground">Validando permisos de usuario</p>
+            <p className="text-sm text-gray-600">Validando permisos de usuario</p>
           </div>
         </div>
       </div>

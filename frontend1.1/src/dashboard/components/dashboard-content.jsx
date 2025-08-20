@@ -1,14 +1,12 @@
-"use client"
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
+import { Badge } from "../../components/ui/badge"
+import { Button } from "../../components/ui/button"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
+import { Textarea } from "../../components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs"
+import { Progress } from "../../components/ui/progress"
 import {
   ShoppingCart,
   Users,
@@ -36,18 +34,66 @@ import {
   Calendar,
 } from "lucide-react"
 
-// Mock data
-const dashboardStats = {
-  ADMIN: [
-    { title: "Total Ventas", value: "$45,231", change: "+20.1%", icon: TrendingUp },
-    { title: "Órdenes", value: "1,234", change: "+15.3%", icon: ShoppingCart },
-    { title: "Usuarios", value: "856", change: "+8.2%", icon: Users },
-    { title: "Productos", value: "342", change: "+12.5%", icon: Package },
-  ],
-  USUARIO: [
-    { title: "Mis Órdenes", value: "12", change: "+2", icon: ShoppingCart },
-    { title: "Favoritos", value: "24", change: "+5", icon: Package },
-  ],
+import { useState, useEffect } from "react"
+import { useAuth } from "../../auth/AuthContext"
+import apiClient from "../../services/api"
+
+// Dynamic dashboard stats that will be fetched from backend
+const getDashboardStats = (userRole, dashboardData) => {
+  if (userRole === 'ADMIN') {
+    return [
+      { title: "Total Ventas", value: dashboardData?.adminStats?.totalSales || "$0", change: dashboardData?.adminStats?.salesGrowth || "+0%", icon: TrendingUp },
+      { title: "Órdenes", value: dashboardData?.adminStats?.totalOrders || "0", change: dashboardData?.adminStats?.ordersGrowth || "+0%", icon: ShoppingCart },
+      { title: "Usuarios", value: dashboardData?.adminStats?.totalUsers || "0", change: dashboardData?.adminStats?.usersGrowth || "+0%", icon: Users },
+      { title: "Productos", value: dashboardData?.adminStats?.totalProducts || "0", change: dashboardData?.adminStats?.productsGrowth || "+0%", icon: Package },
+    ]
+  } else {
+    return [
+      { title: "Mis Órdenes", value: dashboardData?.userStats?.myOrders || "0", change: dashboardData?.userStats?.ordersChange || "+0", icon: ShoppingCart },
+      { title: "Favoritos", value: dashboardData?.userStats?.favorites || "0", change: dashboardData?.userStats?.favoritesChange || "+0", icon: Package },
+    ]
+  }
+}
+
+// Backend data fetching functions
+const fetchDashboardStats = async () => {
+  try {
+    const response = await apiClient.get('/dashboard/stats')
+    return response.data
+  } catch (error) {
+    console.error('Error fetching dashboard stats:', error)
+    return null
+  }
+}
+
+const fetchProducts = async () => {
+  try {
+    const response = await apiClient.get('/products')
+    return response.data
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    return []
+  }
+}
+
+const fetchUsers = async () => {
+  try {
+    const response = await apiClient.get('/users')
+    return response.data
+  } catch (error) {
+    console.error('Error fetching users:', error)
+    return []
+  }
+}
+
+const fetchOrders = async () => {
+  try {
+    const response = await apiClient.get('/orders')
+    return response.data
+  } catch (error) {
+    console.error('Error fetching orders:', error)
+    return []
+  }
 }
 
 const recentOrders = [
@@ -362,7 +408,61 @@ const userProfile = {
 }
 
 export default function DashboardContent({ activeSection, userRole }) {
-  const stats = dashboardStats[userRole] || dashboardStats.USUARIO
+  const { user } = useAuth()
+  const [dashboardData, setDashboardData] = useState(null)
+  const [products, setProducts] = useState([])
+  const [users, setUsers] = useState([])
+  const [orders, setOrders] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  // Load dashboard data on component mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true)
+        
+        // Always fetch dashboard stats
+        const statsData = await fetchDashboardStats()
+        setDashboardData(statsData)
+
+        // If admin, fetch additional data
+        if (userRole === 'ADMIN') {
+          const [productsData, usersData, ordersData] = await Promise.all([
+            fetchProducts(),
+            fetchUsers(), 
+            fetchOrders()
+          ])
+          
+          setProducts(productsData || extendedProducts) // Fallback to mock data
+          setUsers(usersData || extendedUsers)
+          setOrders(ordersData || extendedOrders)
+        }
+      } catch (error) {
+        console.error('Error loading dashboard data:', error)
+        // Use mock data as fallback
+        setProducts(extendedProducts)
+        setUsers(extendedUsers)
+        setOrders(extendedOrders)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadData()
+  }, [userRole])
+
+  const stats = getDashboardStats(userRole, dashboardData)
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-primary mx-auto"></div>
+          <p className="text-gray-600">Cargando datos del dashboard...</p>
+        </div>
+      </div>
+    )
+  }
 
   const renderContent = () => {
     switch (activeSection) {
@@ -371,7 +471,7 @@ export default function DashboardContent({ activeSection, userRole }) {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Mi Dashboard</h1>
-              <p className="text-muted-foreground">Bienvenido de vuelta, aquí tienes un resumen de tu actividad.</p>
+              <p className="text-gray-600">Bienvenido de vuelta, aquí tienes un resumen de tu actividad.</p>
             </div>
 
             {/* User Stats Cards */}
@@ -382,11 +482,11 @@ export default function DashboardContent({ activeSection, userRole }) {
                   <Card key={index}>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <Icon className="h-4 w-4 text-gray-600" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">{stat.value}</div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-gray-600">
                         <span className="text-green-600">{stat.change}</span> este mes
                       </p>
                     </CardContent>
@@ -396,11 +496,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Puntos de Fidelidad</CardTitle>
-                  <Star className="h-4 w-4 text-muted-foreground" />
+                  <Star className="h-4 w-4 text-gray-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">1,250</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     <span className="text-green-600">+150</span> este mes
                   </p>
                 </CardContent>
@@ -408,11 +508,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Gastado</CardTitle>
-                  <DollarSign className="h-4 w-4 text-muted-foreground" />
+                  <DollarSign className="h-4 w-4 text-gray-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">$2,340</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     <span className="text-green-600">+$299</span> este mes
                   </p>
                 </CardContent>
@@ -432,7 +532,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                       <div key={order.id} className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">{order.id}</p>
-                          <p className="text-sm text-muted-foreground">{order.date}</p>
+                          <p className="text-sm text-gray-600">{order.date}</p>
                         </div>
                         <div className="text-right">
                           <p className="font-medium">{order.total}</p>
@@ -474,7 +574,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                           />
                           <div>
                             <p className="font-medium text-sm">{product.name}</p>
-                            <p className="text-xs text-muted-foreground">★ {product.rating}</p>
+                            <p className="text-xs text-gray-600">★ {product.rating}</p>
                           </div>
                         </div>
                         <div className="text-right">
@@ -498,7 +598,7 @@ export default function DashboardContent({ activeSection, userRole }) {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard</h1>
-              <p className="text-muted-foreground">
+              <p className="text-gray-600">
                 Bienvenido de vuelta, aquí tienes un resumen de tu {userRole === "ADMIN" ? "negocio" : "actividad"}.
               </p>
             </div>
@@ -511,11 +611,11 @@ export default function DashboardContent({ activeSection, userRole }) {
                   <Card key={index}>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <Icon className="h-4 w-4 text-gray-600" />
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">{stat.value}</div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-gray-600">
                         <span className="text-green-600">{stat.change}</span> desde el mes pasado
                       </p>
                     </CardContent>
@@ -538,7 +638,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                         <div key={order.id} className="flex items-center justify-between">
                           <div>
                             <p className="font-medium">{order.id}</p>
-                            <p className="text-sm text-muted-foreground">{order.customer}</p>
+                            <p className="text-sm text-gray-600">{order.customer}</p>
                           </div>
                           <div className="text-right">
                             <p className="font-medium">{order.total}</p>
@@ -563,11 +663,11 @@ export default function DashboardContent({ activeSection, userRole }) {
                         <div key={product.id} className="flex items-center justify-between">
                           <div>
                             <p className="font-medium">{product.name}</p>
-                            <p className="text-sm text-muted-foreground">{product.category}</p>
+                            <p className="text-sm text-gray-600">{product.category}</p>
                           </div>
                           <div className="text-right">
                             <p className="font-medium">{product.price}</p>
-                            <p className="text-sm text-muted-foreground">Stock: {product.stock}</p>
+                            <p className="text-sm text-gray-600">Stock: {product.stock}</p>
                           </div>
                         </div>
                       ))}
@@ -585,7 +685,7 @@ export default function DashboardContent({ activeSection, userRole }) {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Gestión de Productos</h1>
-                <p className="text-muted-foreground">Administra tu catálogo de productos</p>
+                <p className="text-gray-600">Administra tu catálogo de productos</p>
               </div>
               <div className="flex space-x-2">
                 <Button variant="outline">
@@ -605,7 +705,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="flex-1">
                     <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 h-4 w-4" />
                       <Input placeholder="Buscar productos..." className="pl-10" />
                     </div>
                   </div>
@@ -638,11 +738,11 @@ export default function DashboardContent({ activeSection, userRole }) {
             {/* Products Table */}
             <Card>
               <CardHeader>
-                <CardTitle>Lista de Productos ({extendedProducts.length})</CardTitle>
+                <CardTitle>Lista de Productos ({products.length})</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {extendedProducts.map((product) => (
+                  {products.map((product) => (
                     <div key={product.id} className="flex items-center justify-between p-4 border rounded-lg">
                       <div className="flex items-center space-x-4">
                         <img
@@ -651,24 +751,24 @@ export default function DashboardContent({ activeSection, userRole }) {
                           className="w-12 h-12 rounded-lg object-cover"
                         />
                         <div>
-                          <h3 className="font-medium">{product.name}</h3>
-                          <p className="text-sm text-muted-foreground">{product.category}</p>
+                          <h3 className="font-medium">{product.nombre || product.name}</h3>
+                          <p className="text-sm text-gray-600">{product.categoria || product.category}</p>
                           <div className="flex items-center space-x-2 mt-1">
                             <Badge variant={product.status === "Activo" ? "default" : "secondary"}>
                               {product.status}
                             </Badge>
-                            <span className="text-xs text-muted-foreground">★ {product.rating}</span>
+                            <span className="text-xs text-gray-600">★ {product.rating}</span>
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-6">
                         <div className="text-right">
-                          <p className="font-medium">{product.price}</p>
-                          <p className="text-sm text-muted-foreground">Costo: {product.cost}</p>
+                          <p className="font-medium">${product.precio || product.price || '0'}</p>
+                          <p className="text-sm text-gray-600">Costo: ${product.costo || product.cost || '0'}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-medium">Stock: {product.stock}</p>
-                          <p className="text-sm text-muted-foreground">{product.sales} vendidos</p>
+                          <p className="font-medium">Stock: {product.stock || 0}</p>
+                          <p className="text-sm text-gray-600">{product.ventas || product.sales || 0} vendidos</p>
                         </div>
                         <div className="flex space-x-2">
                           <Button variant="ghost" size="sm">
@@ -690,8 +790,8 @@ export default function DashboardContent({ activeSection, userRole }) {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-muted-foreground">Acceso Denegado</h2>
-            <p className="text-muted-foreground mt-2">No tienes permisos para ver esta sección</p>
+            <h2 className="text-2xl font-bold text-gray-600">Acceso Denegado</h2>
+            <p className="text-gray-600 mt-2">No tienes permisos para ver esta sección</p>
           </div>
         )
 
@@ -701,7 +801,7 @@ export default function DashboardContent({ activeSection, userRole }) {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Gestión de Usuarios</h1>
-                <p className="text-muted-foreground">Administra los usuarios de tu plataforma</p>
+                <p className="text-gray-600">Administra los usuarios de tu plataforma</p>
               </div>
               <Button>
                 <UserPlus className="mr-2 h-4 w-4" />
@@ -714,25 +814,25 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">856</div>
-                  <p className="text-xs text-muted-foreground">Total Usuarios</p>
+                  <p className="text-xs text-gray-600">Total Usuarios</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">23</div>
-                  <p className="text-xs text-muted-foreground">Nuevos este mes</p>
+                  <p className="text-xs text-gray-600">Nuevos este mes</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">12</div>
-                  <p className="text-xs text-muted-foreground">Administradores</p>
+                  <p className="text-xs text-gray-600">Administradores</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">94.2%</div>
-                  <p className="text-xs text-muted-foreground">Usuarios Activos</p>
+                  <p className="text-xs text-gray-600">Usuarios Activos</p>
                 </CardContent>
               </Card>
             </div>
@@ -744,33 +844,33 @@ export default function DashboardContent({ activeSection, userRole }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {extendedUsers.map((user) => (
+                  {users.map((user) => (
                     <div key={user.id} className="flex items-center justify-between p-4 border rounded-lg">
                       <div className="flex items-center space-x-4">
                         <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-medium">
-                          {user.name.charAt(0)}
+                          {(user.nombre || user.name || 'U').charAt(0)}
                         </div>
                         <div>
-                          <h3 className="font-medium">{user.name}</h3>
-                          <p className="text-sm text-muted-foreground">{user.email}</p>
-                          <p className="text-xs text-muted-foreground">Miembro desde {user.joinDate}</p>
+                          <h3 className="font-medium">{user.nombre || user.name} {user.apellido || ''}</h3>
+                          <p className="text-sm text-gray-600">{user.email}</p>
+                          <p className="text-xs text-gray-600">Miembro desde {user.fechaRegistro || user.joinDate || 'N/A'}</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-6">
                         <div className="text-right">
                           <Badge variant={user.role === "ADMIN" ? "default" : "secondary"}>{user.role}</Badge>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {user.status === "Activo" ? (
+                          <p className="text-sm text-gray-600 mt-1">
+                            {(user.activo || user.status === "Activo") ? (
                               <CheckCircle className="inline h-3 w-3 text-green-500 mr-1" />
                             ) : (
                               <XCircle className="inline h-3 w-3 text-red-500 mr-1" />
                             )}
-                            {user.status}
+                            {user.activo ? 'Activo' : (user.status || 'Inactivo')}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="font-medium">{user.orders} órdenes</p>
-                          <p className="text-sm text-muted-foreground">{user.totalSpent} gastado</p>
+                          <p className="font-medium">{user.ordenes || user.orders || 0} órdenes</p>
+                          <p className="text-sm text-gray-600">${user.totalGastado || user.totalSpent || '0'} gastado</p>
                         </div>
                         <div className="flex space-x-2">
                           <Button variant="ghost" size="sm">
@@ -789,8 +889,8 @@ export default function DashboardContent({ activeSection, userRole }) {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-muted-foreground">Acceso Denegado</h2>
-            <p className="text-muted-foreground mt-2">No tienes permisos para ver esta sección</p>
+            <h2 className="text-2xl font-bold text-gray-600">Acceso Denegado</h2>
+            <p className="text-gray-600 mt-2">No tienes permisos para ver esta sección</p>
           </div>
         )
 
@@ -800,7 +900,7 @@ export default function DashboardContent({ activeSection, userRole }) {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Gestión de Órdenes</h1>
-                <p className="text-muted-foreground">Administra todas las órdenes de la tienda</p>
+                <p className="text-gray-600">Administra todas las órdenes de la tienda</p>
               </div>
               <div className="flex space-x-2">
                 <Button variant="outline">
@@ -819,25 +919,25 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">1,234</div>
-                  <p className="text-xs text-muted-foreground">Total Órdenes</p>
+                  <p className="text-xs text-gray-600">Total Órdenes</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">89</div>
-                  <p className="text-xs text-muted-foreground">Pendientes</p>
+                  <p className="text-xs text-gray-600">Pendientes</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">1,045</div>
-                  <p className="text-xs text-muted-foreground">Completadas</p>
+                  <p className="text-xs text-gray-600">Completadas</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">$45,231</div>
-                  <p className="text-xs text-muted-foreground">Ingresos Totales</p>
+                  <p className="text-xs text-gray-600">Ingresos Totales</p>
                 </CardContent>
               </Card>
             </div>
@@ -849,35 +949,35 @@ export default function DashboardContent({ activeSection, userRole }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {extendedOrders.map((order) => (
+                  {orders.map((order) => (
                     <div key={order.id} className="flex items-center justify-between p-4 border rounded-lg">
                       <div className="flex items-center space-x-4">
                         <div>
-                          <h3 className="font-medium">{order.id}</h3>
-                          <p className="text-sm text-muted-foreground">{order.customer}</p>
-                          <p className="text-xs text-muted-foreground">{order.email}</p>
+                          <h3 className="font-medium">#{order.id}</h3>
+                          <p className="text-sm text-gray-600">{order.cliente || order.customer}</p>
+                          <p className="text-xs text-gray-600">{order.email}</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-6">
                         <div className="text-right">
-                          <p className="font-medium">{order.total}</p>
-                          <p className="text-sm text-muted-foreground">{order.items} artículos</p>
+                          <p className="font-medium">${order.total || '0.00'}</p>
+                          <p className="text-sm text-gray-600">{order.articulos || order.items || 0} artículos</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm">{order.date}</p>
-                          <p className="text-xs text-muted-foreground">{order.payment}</p>
+                          <p className="text-sm">{order.fecha || order.date}</p>
+                          <p className="text-xs text-gray-600">{order.metodoPago || order.payment}</p>
                         </div>
                         <div className="flex items-center space-x-2">
                           <Badge
                             variant={
-                              order.status === "Completado"
+                              (order.estado === "Completado" || order.status === "Completado")
                                 ? "default"
-                                : order.status === "Cancelado"
+                                : (order.estado === "Cancelado" || order.status === "Cancelado")
                                   ? "destructive"
                                   : "secondary"
                             }
                           >
-                            {order.status}
+                            {order.estado || order.status}
                           </Badge>
                           <Button variant="ghost" size="sm">
                             <Eye className="h-4 w-4" />
@@ -892,8 +992,8 @@ export default function DashboardContent({ activeSection, userRole }) {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-muted-foreground">Acceso Denegado</h2>
-            <p className="text-muted-foreground mt-2">No tienes permisos para ver esta sección</p>
+            <h2 className="text-2xl font-bold text-gray-600">Acceso Denegado</h2>
+            <p className="text-gray-600 mt-2">No tienes permisos para ver esta sección</p>
           </div>
         )
 
@@ -902,7 +1002,7 @@ export default function DashboardContent({ activeSection, userRole }) {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Analytics</h1>
-              <p className="text-muted-foreground">Análisis detallado del rendimiento de tu negocio</p>
+              <p className="text-gray-600">Análisis detallado del rendimiento de tu negocio</p>
             </div>
 
             {/* Analytics Overview */}
@@ -910,11 +1010,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Ingresos</CardTitle>
-                  <DollarSign className="h-4 w-4 text-muted-foreground" />
+                  <DollarSign className="h-4 w-4 text-gray-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{analyticsData.revenue.current}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     <span className="text-green-600">{analyticsData.revenue.growth}</span> vs mes anterior
                   </p>
                   <Progress value={75} className="mt-2" />
@@ -923,11 +1023,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Órdenes</CardTitle>
-                  <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+                  <ShoppingCart className="h-4 w-4 text-gray-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{analyticsData.orders.current}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     <span className="text-green-600">{analyticsData.orders.growth}</span> vs mes anterior
                   </p>
                   <Progress value={60} className="mt-2" />
@@ -936,11 +1036,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Clientes</CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
+                  <Users className="h-4 w-4 text-gray-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{analyticsData.customers.current}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     <span className="text-green-600">{analyticsData.customers.growth}</span> vs mes anterior
                   </p>
                   <Progress value={45} className="mt-2" />
@@ -949,11 +1049,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Conversión</CardTitle>
-                  <Activity className="h-4 w-4 text-muted-foreground" />
+                  <Activity className="h-4 w-4 text-gray-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{analyticsData.conversion.current}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-gray-600">
                     <span className="text-green-600">{analyticsData.conversion.growth}</span> vs mes anterior
                   </p>
                   <Progress value={32} className="mt-2" />
@@ -971,8 +1071,8 @@ export default function DashboardContent({ activeSection, userRole }) {
                 <CardContent>
                   <div className="h-[300px] flex items-center justify-center bg-muted/20 rounded-lg">
                     <div className="text-center">
-                      <BarChart3 className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-                      <p className="text-muted-foreground">Gráfico de barras aquí</p>
+                      <BarChart3 className="h-12 w-12 text-gray-600 mx-auto mb-2" />
+                      <p className="text-gray-600">Gráfico de barras aquí</p>
                     </div>
                   </div>
                 </CardContent>
@@ -985,8 +1085,8 @@ export default function DashboardContent({ activeSection, userRole }) {
                 <CardContent>
                   <div className="h-[300px] flex items-center justify-center bg-muted/20 rounded-lg">
                     <div className="text-center">
-                      <PieChart className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-                      <p className="text-muted-foreground">Gráfico circular aquí</p>
+                      <PieChart className="h-12 w-12 text-gray-600 mx-auto mb-2" />
+                      <p className="text-gray-600">Gráfico circular aquí</p>
                     </div>
                   </div>
                 </CardContent>
@@ -995,8 +1095,8 @@ export default function DashboardContent({ activeSection, userRole }) {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-muted-foreground">Acceso Denegado</h2>
-            <p className="text-muted-foreground mt-2">No tienes permisos para ver esta sección</p>
+            <h2 className="text-2xl font-bold text-gray-600">Acceso Denegado</h2>
+            <p className="text-gray-600 mt-2">No tienes permisos para ver esta sección</p>
           </div>
         )
 
@@ -1005,7 +1105,7 @@ export default function DashboardContent({ activeSection, userRole }) {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Configuración</h1>
-              <p className="text-muted-foreground">Administra la configuración de tu tienda</p>
+              <p className="text-gray-600">Administra la configuración de tu tienda</p>
             </div>
 
             <Tabs defaultValue="general" className="space-y-4">
@@ -1058,7 +1158,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                           <CreditCard className="h-5 w-5" />
                           <div>
                             <p className="font-medium">Tarjetas de Crédito</p>
-                            <p className="text-sm text-muted-foreground">Visa, Mastercard, American Express</p>
+                            <p className="text-sm text-gray-600">Visa, Mastercard, American Express</p>
                           </div>
                         </div>
                         <Badge>Activo</Badge>
@@ -1068,7 +1168,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                           <DollarSign className="h-5 w-5" />
                           <div>
                             <p className="font-medium">PayPal</p>
-                            <p className="text-sm text-muted-foreground">Pagos seguros con PayPal</p>
+                            <p className="text-sm text-gray-600">Pagos seguros con PayPal</p>
                           </div>
                         </div>
                         <Badge>Activo</Badge>
@@ -1085,7 +1185,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                     <CardDescription>Configura las opciones de envío disponibles</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">Configuración de envíos próximamente...</p>
+                    <p className="text-gray-600">Configuración de envíos próximamente...</p>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -1097,7 +1197,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                     <CardDescription>Configura las notificaciones del sistema</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">Configuración de notificaciones próximamente...</p>
+                    <p className="text-gray-600">Configuración de notificaciones próximamente...</p>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -1105,8 +1205,8 @@ export default function DashboardContent({ activeSection, userRole }) {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-muted-foreground">Acceso Denegado</h2>
-            <p className="text-muted-foreground mt-2">No tienes permisos para ver esta sección</p>
+            <h2 className="text-2xl font-bold text-gray-600">Acceso Denegado</h2>
+            <p className="text-gray-600 mt-2">No tienes permisos para ver esta sección</p>
           </div>
         )
 
@@ -1115,7 +1215,7 @@ export default function DashboardContent({ activeSection, userRole }) {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Mis Órdenes</h1>
-              <p className="text-muted-foreground">Revisa el estado y historial de tus pedidos</p>
+              <p className="text-gray-600">Revisa el estado y historial de tus pedidos</p>
             </div>
 
             {/* Order Stats */}
@@ -1123,25 +1223,25 @@ export default function DashboardContent({ activeSection, userRole }) {
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">12</div>
-                  <p className="text-xs text-muted-foreground">Total Órdenes</p>
+                  <p className="text-xs text-gray-600">Total Órdenes</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">1</div>
-                  <p className="text-xs text-muted-foreground">En Proceso</p>
+                  <p className="text-xs text-gray-600">En Proceso</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">10</div>
-                  <p className="text-xs text-muted-foreground">Entregadas</p>
+                  <p className="text-xs text-gray-600">Entregadas</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">$2,340</div>
-                  <p className="text-xs text-muted-foreground">Total Gastado</p>
+                  <p className="text-xs text-gray-600">Total Gastado</p>
                 </CardContent>
               </Card>
             </div>
@@ -1177,7 +1277,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                           <div key={index} className="flex justify-between items-center">
                             <div>
                               <p className="font-medium">{item.name}</p>
-                              <p className="text-sm text-muted-foreground">Cantidad: {item.quantity}</p>
+                              <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
                             </div>
                             <p className="font-medium">{item.price}</p>
                           </div>
@@ -1191,12 +1291,12 @@ export default function DashboardContent({ activeSection, userRole }) {
                           <span className="font-bold text-lg">{order.total}</span>
                         </div>
                         {order.tracking && (
-                          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                          <div className="flex items-center space-x-2 text-sm text-gray-600">
                             <Truck className="h-4 w-4" />
                             <span>Tracking: {order.tracking}</span>
                           </div>
                         )}
-                        <div className="flex items-center space-x-2 text-sm text-muted-foreground mt-1">
+                        <div className="flex items-center space-x-2 text-sm text-gray-600 mt-1">
                           <Calendar className="h-4 w-4" />
                           <span>Entrega estimada: {order.estimatedDelivery}</span>
                         </div>
@@ -1234,7 +1334,7 @@ export default function DashboardContent({ activeSection, userRole }) {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold text-foreground mb-2">Mi Perfil</h1>
-              <p className="text-muted-foreground">Gestiona tu información personal y preferencias</p>
+              <p className="text-gray-600">Gestiona tu información personal y preferencias</p>
             </div>
 
             <Tabs defaultValue="personal" className="space-y-4">
@@ -1288,7 +1388,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                           <Edit className="h-4 w-4" />
                         </Button>
                       </div>
-                      <div className="text-sm text-muted-foreground space-y-1">
+                      <div className="text-sm text-gray-600 space-y-1">
                         <p>{userProfile.address.street}</p>
                         <p>
                           {userProfile.address.city}, {userProfile.address.state} {userProfile.address.zipCode}
@@ -1315,21 +1415,21 @@ export default function DashboardContent({ activeSection, userRole }) {
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">Newsletter</p>
-                          <p className="text-sm text-muted-foreground">Recibe noticias y ofertas especiales</p>
+                          <p className="text-sm text-gray-600">Recibe noticias y ofertas especiales</p>
                         </div>
                         <input type="checkbox" defaultChecked={userProfile.preferences.newsletter} />
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">Promociones</p>
-                          <p className="text-sm text-muted-foreground">Notificaciones sobre descuentos y ofertas</p>
+                          <p className="text-sm text-gray-600">Notificaciones sobre descuentos y ofertas</p>
                         </div>
                         <input type="checkbox" defaultChecked={userProfile.preferences.promotions} />
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-medium">Actualizaciones de Órdenes</p>
-                          <p className="text-sm text-muted-foreground">Estado de envío y entrega</p>
+                          <p className="text-sm text-gray-600">Estado de envío y entrega</p>
                         </div>
                         <input type="checkbox" defaultChecked={userProfile.preferences.orderUpdates} />
                       </div>
@@ -1374,7 +1474,7 @@ export default function DashboardContent({ activeSection, userRole }) {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-3xl font-bold text-foreground mb-2">Tienda</h1>
-                <p className="text-muted-foreground">Descubre nuestros productos</p>
+                <p className="text-gray-600">Descubre nuestros productos</p>
               </div>
               {userRole === "USUARIO" && (
                 <Button variant="outline">
@@ -1390,7 +1490,7 @@ export default function DashboardContent({ activeSection, userRole }) {
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="flex-1">
                     <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 h-4 w-4" />
                       <Input placeholder="Buscar productos..." className="pl-10" />
                     </div>
                   </div>
@@ -1440,18 +1540,18 @@ export default function DashboardContent({ activeSection, userRole }) {
                           />
                           <div>
                             <h3 className="font-medium">{product.name}</h3>
-                            <p className="text-sm text-muted-foreground">{product.category}</p>
+                            <p className="text-sm text-gray-600">{product.category}</p>
                             <div className="flex items-center space-x-1 mt-1">
                               <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                               <span className="text-xs">{product.rating}</span>
-                              <span className="text-xs text-muted-foreground">({product.reviews})</span>
+                              <span className="text-xs text-gray-600">({product.reviews})</span>
                             </div>
                           </div>
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-bold">{product.price}</p>
                               {product.originalPrice && (
-                                <p className="text-sm text-muted-foreground line-through">{product.originalPrice}</p>
+                                <p className="text-sm text-gray-600 line-through">{product.originalPrice}</p>
                               )}
                             </div>
                             {product.discount && <Badge variant="secondary">{product.discount} OFF</Badge>}
@@ -1488,18 +1588,18 @@ export default function DashboardContent({ activeSection, userRole }) {
                       />
                       <div>
                         <h3 className="font-medium">{product.name}</h3>
-                        <p className="text-sm text-muted-foreground">{product.category}</p>
+                        <p className="text-sm text-gray-600">{product.category}</p>
                         <div className="flex items-center space-x-1 mt-1">
                           <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                           <span className="text-xs">{product.rating}</span>
-                          <span className="text-xs text-muted-foreground">({product.reviews})</span>
+                          <span className="text-xs text-gray-600">({product.reviews})</span>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="font-bold">{product.price}</p>
                           {product.originalPrice && (
-                            <p className="text-sm text-muted-foreground line-through">{product.originalPrice}</p>
+                            <p className="text-sm text-gray-600 line-through">{product.originalPrice}</p>
                           )}
                         </div>
                         {product.discount && <Badge variant="secondary">{product.discount} OFF</Badge>}
@@ -1528,11 +1628,11 @@ export default function DashboardContent({ activeSection, userRole }) {
               <h1 className="text-3xl font-bold text-foreground mb-2">
                 {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
               </h1>
-              <p className="text-muted-foreground">Esta sección está en desarrollo</p>
+              <p className="text-gray-600">Esta sección está en desarrollo</p>
             </div>
             <Card>
               <CardContent className="pt-6">
-                <p className="text-center text-muted-foreground">Contenido para {activeSection} próximamente...</p>
+                <p className="text-center text-gray-600">Contenido para {activeSection} próximamente...</p>
               </CardContent>
             </Card>
           </div>

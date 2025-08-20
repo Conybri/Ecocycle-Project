@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -27,7 +27,6 @@ const HomePage = () => {
     },
   ];
 
-  const carouselRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const slides = [
     "https://www.concienciaeco.com/wp-content/uploads/2016/05/0212131252_reciclaje.jpg",
@@ -40,7 +39,7 @@ const HomePage = () => {
       setActiveIndex((i) => (i + 1) % slides.length);
     }, 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [slides.length]);
 
   const goTo = (index) => setActiveIndex(index);
 

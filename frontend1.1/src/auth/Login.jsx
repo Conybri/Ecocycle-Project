@@ -14,20 +14,16 @@ const Login = () => {
     setError('');
 
     const credentials = { email, password };
-    console.log('Enviando credenciales de login:', credentials);
 
     try {
-      const response = await login(credentials);
-      console.log('Respuesta del backend (login):', response);
-
-      if (response.jwt) {
-        navigate('/');
-      } else {
-        setError(response.message || 'Correo electrónico o contraseña incorrectos.');
-      }
+      await login(credentials);
+      navigate('/dashboard'); // Redirige al dashboard en caso de éxito
     } catch (err) {
-      setError('Ocurrió un error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
-      console.error('Login error:', err);
+      if (err.response && err.response.status === 401) {
+        setError('Correo electrónico o contraseña incorrectos.');
+      } else {
+        setError('No se pudo conectar con el servidor. Inténtalo más tarde.');
+      }
     }
   };
 
