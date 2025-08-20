@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-// import { useAuth } from "../auth/AuthContext"; // Uncomment when auth is fully integrated
+import { useAuth } from "../auth/AuthContext"; 
 
 const Profile = () => {
-  // const { user } = useAuth(); // Uncomment when auth is fully integrated
-  const user = { // Mock user data
-      nombre: "Ana",
-      apellido: "López",
-      ciudad: "Santiago, Chile",
-      fechaRegistro: "2023-05-15T10:00:00Z",
-      puntosTotales: 1250
-  };
+  const { user } = useAuth(); 
+  
 
   const [activeTab, setActiveTab] = useState("resumen");
 
