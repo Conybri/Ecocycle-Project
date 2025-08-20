@@ -120,7 +120,7 @@ const Navbar = ({ setShowLogoutModal }) => {
               {isUserMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 py-1 border border-gray-100">
                   <Link
-                    to="/profile"
+                    to="/dashboard"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200"
                     onClick={() => setIsUserMenuOpen(false)}
                   >
@@ -188,7 +188,7 @@ const Navbar = ({ setShowLogoutModal }) => {
             {user ? (
               <div className="flex flex-col gap-4 items-center">
                 <Link
-                  to="/profile"
+                  to="/dashboard"
                   className="w-fit text-center font-semibold text-green-600 p-2 rounded-md hover:bg-green-100 transition-colors"
                 >
                   Perfil

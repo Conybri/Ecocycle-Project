@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { loginUser, registerUser } from '../services/api';
+import { mockLogin, mockRegister } from '../services/mock-auth';
 
 const AuthContext = createContext(null);
 
@@ -17,13 +18,30 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (credentials) => {
-    const response = await loginUser(credentials);
-    if (response.jwt) {
-      localStorage.setItem('authToken', response.jwt);
-      localStorage.setItem('user', JSON.stringify(response.usuario));
-      setUser(response.usuario);
+    try {
+      // Try real API first
+      const response = await loginUser(credentials);
+      if (response.jwt) {
+        localStorage.setItem('authToken', response.jwt);
+        localStorage.setItem('user', JSON.stringify(response.usuario));
+        setUser(response.usuario);
+      }
+      return response;
+    } catch (error) {
+      // If API fails, use mock authentication
+      console.log('API not available, using mock authentication');
+      try {
+        const response = await mockLogin(credentials);
+        if (response.jwt) {
+          localStorage.setItem('authToken', response.jwt);
+          localStorage.setItem('user', JSON.stringify(response.usuario));
+          setUser(response.usuario);
+        }
+        return response;
+      } catch (mockError) {
+        throw mockError;
+      }
     }
-    return response;
   };
 
   const register = async (userData) => {

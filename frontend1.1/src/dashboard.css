@@ -1,0 +1,12 @@
+/* Dashboard styles integration */
+@import './dashboard/app/globals.css';
+
+/* Ensure dashboard has full height when integrated */
+.dashboard-wrapper {
+  min-height: 100vh;
+}
+
+/* Override any conflicting styles */
+.dashboard-wrapper * {
+  box-sizing: border-box;
+}
