@@ -1,14 +1,6 @@
 import React from "react";
-import { useAuth } from "../../auth/AuthContext";
 
-const LogoutModal = ({ show, onClose }) => {
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    onClose();
-  };
-
+const LogoutModal = ({ show, onClose, onConfirm }) => {
   if (!show) return null;
 
   return (
@@ -28,7 +20,7 @@ const LogoutModal = ({ show, onClose }) => {
             Cancelar
           </button>
           <button
-            onClick={handleLogout}
+            onClick={onConfirm}
             className="px-6 py-3 rounded-full bg-red-600 text-white hover:bg-red-700 font-bold transition-all duration-200 ease-in-out transform hover:scale-105"
           >
             Salir
