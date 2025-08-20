@@ -17,6 +17,7 @@ import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import { cn } from "../../lib/utils";
 import { useAuth } from "../../auth/AuthContext";
+import Logo from "../../assets/img/Logo.webp";
 
 const menuItems = {
   ADMIN: [
@@ -115,17 +116,15 @@ export default function Sidebar({
   return (
     <div
       className={cn(
-        "bg-white border-r border-gray-200 transition-all duration-300 flex flex-col h-full shadow-sm",
+        "bg-white border-r border-green-200 transition-all duration-300 flex flex-col h-full shadow-sm",
         collapsed ? "w-16" : "w-64"
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+      <div className="p-4 border-b border-green-200 flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center space-x-2">
-            <h2 className="text-xl font-bold text-gray-800">
-              EcoCycle
-            </h2>
+            <img src={Logo} alt="EcoCycle Logo" className="h-24" />
             {!isValidRole && (
               <AlertTriangle
                 className="h-4 w-4 text-red-500"
@@ -138,7 +137,7 @@ export default function Sidebar({
           variant="ghost"
           size="sm"
           onClick={onToggleCollapse}
-          className="text-gray-600 hover:bg-gray-100"
+          className="text-green-600 hover:bg-green-100"
         >
           {collapsed ? (
             <ChevronRight className="h-4 w-4" />
@@ -223,7 +222,7 @@ export default function Sidebar({
         <div className="p-4 border-t border-sidebar-border">
           <div className="text-center space-y-2">
             <p className="text-xs text-muted-foreground">
-              © 2024 ECommerce Dashboard
+              © 2025 ECommerce Dashboard
             </p>
             <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
               <span>Sesión segura</span>

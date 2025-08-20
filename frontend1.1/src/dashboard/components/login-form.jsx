@@ -1,44 +1,50 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Loader2, Store } from "lucide-react"
-import { useAuth } from "@/contexts/auth-context"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Loader2, Store } from "lucide-react";
+import { useAuth } from "@/contexts/auth-context";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const { login } = useAuth()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setLoading(true)
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    const result = await login(email, password)
+    const result = await login(email, password);
 
     if (!result.success) {
-      setError(result.error)
+      setError(result.error);
     }
 
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const fillDemoCredentials = (role) => {
     if (role === "ADMIN") {
-      setEmail("admin@ecommerce.com")
-      setPassword("admin123")
+      setEmail("admin@ecommerce.com");
+      setPassword("admin123");
     } else {
-      setEmail("usuario@ecommerce.com")
-      setPassword("user123")
+      setEmail("usuario@ecommerce.com");
+      setPassword("user123");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
@@ -50,7 +56,9 @@ export default function LoginForm() {
             </div>
           </div>
           <CardTitle className="text-2xl">ECommerce Dashboard</CardTitle>
-          <CardDescription>Inicia sesión para acceder al panel de control</CardDescription>
+          <CardDescription>
+            Inicia sesión para acceder al panel de control
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -91,7 +99,9 @@ export default function LoginForm() {
 
           {/* Demo credentials */}
           <div className="mt-6 pt-6 border-t">
-            <p className="text-sm text-muted-foreground mb-3 text-center">Credenciales de demostración:</p>
+            <p className="text-sm text-muted-foreground mb-3 text-center">
+              Credenciales de demostración:
+            </p>
             <div className="space-y-2">
               <Button
                 variant="outline"
@@ -114,5 +124,5 @@ export default function LoginForm() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
