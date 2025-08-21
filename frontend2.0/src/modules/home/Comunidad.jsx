@@ -71,7 +71,6 @@ const Comunidad = () => {
                       <p className="text-sm text-gray-600 mb-3">{story.description}</p>
                       <div className="flex justify-between items-center">
                         <span className="text-xs text-gray-500">⏱️ {story.time} de lectura</span>
-                        <button className="px-3 py-1 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700 transition-colors">Leer más</button>
                       </div>
                     </div>
                   </div>

@@ -77,7 +77,7 @@ const Blog = () => {
             <h2 className="text-2xl font-bold mb-2">Mantente Informado</h2>
             <p className="mb-6 opacity-90">Suscríbete para recibir las últimas noticias sobre economía circular y sostenibilidad.</p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input type="email" placeholder="Tu correo electrónico" className="flex-grow p-3 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" />
+              <input type="email" placeholder="Tu correo electrónico" className="flex-grow p-3 rounded-md  bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" />
               <button className="px-6 py-3 bg-white text-green-600 font-bold rounded-md hover:bg-gray-200 transition-colors">Suscribirse</button>
             </div>
           </section>

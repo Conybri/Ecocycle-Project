@@ -27,12 +27,12 @@ const HomePage = () => {
     },
   ];
 
-  const carouselRef = useRef(null);
+  const CarouselRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const slides = [
-    "https://tecdn.b-cdn.net/img/Photos/Slides/img%20(15).jpg",
-    "https://tecdn.b-cdn.net/img/Photos/Slides/img%20(22).jpg",
-    "https://tecdn.b-cdn.net/img/Photos/Slides/img%20(23).jpg",
+    "https://www.pactoglobal-colombia.org/images/jch-optimize/ng/images_NoticiasHome_2023_PORTS__e5e35.webp",
+    "https://integrity.cl/wp-content/uploads/2024/08/botella-reciclaje-pet-1024x394.png.webp",
+    "https://incinerox.com.ec/wp-content/uploads/Que-puedo-reciclar.jpg",
   ];
 
   useEffect(() => {
@@ -80,29 +80,35 @@ const HomePage = () => {
 
       {/* Carousel Section */}
       <section className="py-12 bg-green-50">
-        <div className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-xl shadow-md">
+        <div className="relative w-full max-w-6xl aspect-[16/6] mx-auto overflow-hidden rounded-xl shadow-md bg-gray-200">
           <div
-            className="whitespace-nowrap transition-transform duration-700"
+            className="flex transition-transform duration-700 h-full"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
             {slides.map((src, idx) => (
-              <img
+              <div
                 key={src}
-                src={src}
-                alt={`Slide ${idx + 1}`}
-                className="inline-block w-full h-auto align-top"
-              />
+                className="flex-shrink-0 w-full h-full flex items-center justify-center"
+                style={{ minWidth: "100%" }}
+              >
+                <img
+                  src={src}
+                  alt={`Slide ${idx + 1}`}
+                  className="w-full h-full object-cover object-center rounded-xl"
+                  style={{ aspectRatio: "16/6" }}
+                />
+              </div>
             ))}
           </div>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
             {slides.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => goTo(idx)}
-                className={`h-2.5 w-2.5 rounded-full ${idx === activeIndex ? "bg-white" : "bg-white/60"}`}
+                className={`h-2.5 w-2.5 rounded-full border border-white ${idx === activeIndex ? "bg-white" : "bg-white/60"}`}
                 aria-label={`Go to slide ${idx + 1}`}
-              />)
-            )}
+              />
+            ))}
           </div>
         </div>
       </section>

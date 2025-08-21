@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/img/Logo.webp";
 
 const Footer = () => {
   const footerSections = {
@@ -28,7 +29,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           <div className="md:col-span-2 lg:col-span-1">
-            <h3 className="text-2xl font-bold mb-4">EcoCycle</h3>
+            <img src={Logo} alt="EcoCycle Logo" className="w-32 mb-4" />
             <p className="text-gray-400 leading-relaxed">Revolucionamos el reciclaje con tecnología inteligente, conectando usuarios y empresas para un futuro más sostenible.</p>
           </div>
 
@@ -57,7 +58,7 @@ const Footer = () => {
                 <a key={index} href={social.href} aria-label={social.label} className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">{social.icon}</a>
               ))}
             </div>
-            <p className="text-gray-400 text-sm">Hecho con ❤️ para el planeta</p>
+            <p className="text-gray-400 text-sm">Hecho ❤️ para el planeta</p>
           </div>
 
         </div>
