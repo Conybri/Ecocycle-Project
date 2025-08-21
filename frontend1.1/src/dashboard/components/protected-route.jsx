@@ -42,7 +42,7 @@ export default function ProtectedRoute({ children, requiredRole = null, fallback
           <CardContent className="text-center space-y-4">
             <div className="p-4 bg-muted rounded-lg">
               <div className="flex items-center justify-center space-x-2 text-sm">
-                <Shield className="h-4 w-4" />
+                <Shield className="icon-sm" />
                 <span>
                   Tu rol actual: <strong>{user.role}</strong>
                 </span>

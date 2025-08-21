@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from 'tailwindcss/plugin'; // Import the plugin utility
+
 export default {
   content: [
     "./index.html",
@@ -15,5 +17,19 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addUtilities }) {
+      addUtilities({
+        '.icon-xs': { // <CHANGE> Added icon-xs utility
+          '@apply h-3 w-3': {},
+        },
+        '.icon-sm': {
+          '@apply h-4 w-4': {},
+        },
+        '.icon-md': {
+          '@apply h-6 w-6': {},
+        },
+      });
+    }),
+  ],
 }

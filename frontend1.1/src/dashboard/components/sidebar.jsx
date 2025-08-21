@@ -128,7 +128,7 @@ export default function Sidebar({
             </h2>
             {!isValidRole && (
               <AlertTriangle
-                className="h-4 w-4 text-red-500"
+                className="icon-sm text-red-500"
                 title="Rol no válido"
               />
             )}
@@ -141,9 +141,9 @@ export default function Sidebar({
           className="text-gray-600 hover:bg-gray-100"
         >
           {collapsed ? (
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="icon-sm" />
           ) : (
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="icon-sm" />
           )}
         </Button>
       </div>
@@ -161,7 +161,7 @@ export default function Sidebar({
                   "bg-secondary text-secondary-foreground"
               )}
             >
-              <Shield className="h-3 w-3" />
+              <Shield className="icon-xs" />
               <span>{userRole}</span>
             </Badge>
             {isValidRole && (
@@ -197,7 +197,7 @@ export default function Sidebar({
                   disabled={!hasAccess}
                   title={collapsed ? item.label : item.description}
                 >
-                  <Icon className={cn("h-4 w-4", !collapsed && "mr-3")} />
+                  <Icon className={cn("icon-sm", !collapsed && "mr-3")} />
                   {!collapsed && (
                     <div className="flex-1 text-left">
                       <span className="block">{item.label}</span>

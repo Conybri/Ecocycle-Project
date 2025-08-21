@@ -33,7 +33,7 @@ export default function Header({ user, onThemeToggle, isDark }) {
         {/* Search */}
         <div className="flex items-center space-x-4 flex-1 max-w-md">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 icon-sm" />
             <Input
               placeholder="Buscar productos, usuarios, órdenes..."
               className="pl-10"
@@ -43,16 +43,7 @@ export default function Header({ user, onThemeToggle, isDark }) {
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          {/* Home Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={goToHomePage}
-            className="text-gray-600 hover:text-gray-900"
-            title="Volver a la página principal"
-          >
-            <Home className="h-4 w-4" />
-          </Button>
+          
 
           {/* Theme Toggle */}
           <Button
@@ -62,17 +53,17 @@ export default function Header({ user, onThemeToggle, isDark }) {
             className="text-gray-600 hover:text-gray-900"
           >
             {isDark ? (
-              <Sun className="h-4 w-4" />
+              <Sun className="icon-sm" />
             ) : (
-              <Moon className="h-4 w-4" />
+              <Moon className="icon-sm" />
             )}
           </Button>
 
           {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
+              <Button variant="ghost" className="relative icon-md rounded-full">
+                <Avatar className="icon-md">
                   <AvatarImage
                     src={user?.avatar || "/placeholder.svg"}
                     alt={user?.name}
@@ -99,16 +90,16 @@ export default function Header({ user, onThemeToggle, isDark }) {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4" />
+                <User className="mr-2 icon-sm" />
                 <span>Perfil</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={goToHomePage}>
-                <Home className="mr-2 h-4 w-4" />
+                <Home className="mr-2 icon-sm" />
                 <span>Página Principal</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
-                <LogOut className="mr-2 h-4 w-4" />
+                <LogOut className="mr-2 icon-sm" />
                 <span>Cerrar Sesión</span>
               </DropdownMenuItem>
             </DropdownMenuContent>

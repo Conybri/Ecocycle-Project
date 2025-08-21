@@ -46,7 +46,7 @@ export default function LoginForm() {
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-primary rounded-full">
-              <Store className="h-6 w-6 text-primary-foreground" />
+              <Store className="icon-md text-primary-foreground" />
             </div>
           </div>
           <CardTitle className="text-2xl">ECommerce Dashboard</CardTitle>
@@ -84,7 +84,7 @@ export default function LoginForm() {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {loading && <Loader2 className="mr-2 icon-sm animate-spin" />}
               Iniciar Sesión
             </Button>
           </form>
