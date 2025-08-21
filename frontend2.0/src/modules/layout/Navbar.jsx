@@ -113,15 +113,9 @@ const Navbar = () => {
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     onClick={() => setIsUserMenuOpen(false)}
                   >
-                    Dashboard
-                  </Link>
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setIsUserMenuOpen(false)}
-                  >
                     Perfil
                   </Link>
+
                   <button
                     onClick={() => {
                       setShowLogoutModal(true);
@@ -196,15 +190,9 @@ const Navbar = () => {
                   className="w-full text-center font-semibold text-green-600 p-2 rounded-md hover:bg-green-100 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Dashboard
-                </Link>
-                <Link
-                  to="/profile"
-                  className="w-full text-center font-semibold text-green-600 p-2 rounded-md hover:bg-green-100 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
                   Perfil
                 </Link>
+
                 <button
                   onClick={() => {
                     setShowLogoutModal(true);
