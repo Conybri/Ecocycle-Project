@@ -1,0 +1,16 @@
+.sidebar-item:hover {
+    background: linear-gradient(90deg, rgba(31, 130, 191, 0.1) 0%, rgba(48, 191, 110, 0.1) 100%);
+}
+.stat-card {
+    transition: all 0.3s ease;
+}
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.eco-gradient {
+    background: linear-gradient(135deg, #1F82BF 0%, #30BF6E 25%, #8CBF3F 50%, #F2A341 75%, #F28241 100%);
+}
+.logo-bg {
+    background: linear-gradient(45deg, #30BF6E, #1F82BF);
+}
