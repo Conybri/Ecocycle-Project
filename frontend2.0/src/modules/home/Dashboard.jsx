@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../auth/AuthContext';
-import DashboardSidebar from '../components/DashboardSidebar';
-import DashboardHeader from '../components/DashboardHeader';
-import DashboardContent from '../dashboard/components/dashboard-content';
-import '../dashboard.css';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../auth/AuthContext";
+import DashboardSidebar from "../components/DashboardSidebar";
+import DashboardHeader from "../components/DashboardHeader";
+import DashboardContent from "../dashboard/components/dashboard-content";
+import "../dashboard.css";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -43,8 +43,8 @@ export default function Dashboard() {
           <p className="text-gray-600 mb-4">
             Necesitas iniciar sesión para acceder al dashboard.
           </p>
-          <a 
-            href="/login" 
+          <a
+            href="/login"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Iniciar Sesión
@@ -58,16 +58,24 @@ export default function Dashboard() {
   const dashboardUser = {
     id: user.id,
     email: user.email,
-    name: user.nombre || user.name || 'Usuario',
-    role: user.tipo === 'admin' ? 'ADMIN' : 'USUARIO',
+    name: user.nombre || user.name || "Usuario",
+    role: user.tipo === "admin" ? "ADMIN" : "USUARIO",
     avatar: "/diverse-user-avatars.png",
-    permissions: user.tipo === 'admin' ? ["read", "write", "delete", "admin"] : ["read"],
+    permissions:
+      user.tipo === "admin" ? ["read", "write", "delete", "admin"] : ["read"],
     loginTime: new Date().toISOString(),
   };
 
   const handleSectionChange = (newSection) => {
     // Validate if user has access to the requested section
-    const adminSections = ["products", "users", "orders", "analytics", "payments", "settings"];
+    const adminSections = [
+      "products",
+      "users",
+      "orders",
+      "analytics",
+      "payments",
+      "settings",
+    ];
     const userSections = ["dashboard", "my-orders", "profile", "store"];
 
     if (dashboardUser.role === "ADMIN") {
@@ -123,9 +131,9 @@ export default function Dashboard() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Header */}
-          <DashboardHeader 
-            user={dashboardUser} 
-            onThemeToggle={handleThemeToggle} 
+          <DashboardHeader
+            user={dashboardUser}
+            onThemeToggle={handleThemeToggle}
             isDark={isDark}
             onLogout={logout}
           />

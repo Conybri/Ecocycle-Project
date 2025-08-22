@@ -115,7 +115,7 @@ function Sidebar({ isOpen, onClose }) {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white drop-shadow-md">
-                  EcoCommerce
+                  EcoCycle
                 </h1>
                 <p className="text-xs text-green-100 font-medium">
                   Transformando el futuro

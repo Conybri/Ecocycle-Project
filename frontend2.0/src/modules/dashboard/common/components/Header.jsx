@@ -123,45 +123,6 @@ export default function Header({ onMenuClick, onLogoutModalChange }) {
           </div>
         </div>
 
-        {/* Center - Eco Stats */}
-        <div className="hidden lg:flex items-center space-x-4">
-          {/* Botón de CO₂ evitados */}
-          <div
-            className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${
-              isDarkMode
-                ? "bg-gradient-to-r from-[#30BF6E]/20 to-[#8CBF3F]/20 border-gray-600/50"
-                : "bg-gradient-to-r from-[#30BF6E]/10 to-[#8CBF3F]/10 border-green-200/50"
-            }`}
-          >
-            <Leaf className="w-4 h-4 text-[#30BF6E]" />
-            <span
-              className={`text-xs font-bold ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
-              }`}
-            >
-              2.5M kg CO₂ evitados
-            </span>
-          </div>
-
-          {/* Botón de Nivel Eco: Gold */}
-          <div
-            className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${
-              isDarkMode
-                ? "bg-gradient-to-r from-[#F2A341]/20 to-[#F28241]/20 border-gray-600/50"
-                : "bg-gradient-to-r from-[#F2A341]/10 to-[#F28241]/10 border-orange-200/50"
-            }`}
-          >
-            <Trophy className="w-4 h-4 text-[#F2A341]" />
-            <span
-              className={`text-xs font-bold ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
-              }`}
-            >
-              Nivel Eco: Gold
-            </span>
-          </div>
-        </div>
-
         {/* Right side - MEJORADO CON MEJOR ESPACIADO */}
         <div className="flex items-center space-x-6 lg:space-x-8">
           {/* Theme toggle */}
