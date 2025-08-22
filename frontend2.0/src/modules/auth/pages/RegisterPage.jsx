@@ -12,6 +12,7 @@ import Footer from "../../layout/Footer";
 
 const RegisterPage = () => {
   const [error, setError] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
   const { register } = useAuth();
   const {
@@ -64,8 +65,7 @@ const RegisterPage = () => {
       const { data, status } = await register(userData);
 
       if (status === 200) {
-        alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-        navigate("/login");
+        setShowSuccessModal(true);
       } else if (status === 409) {
         setError("El correo electrónico ya está registrado.");
       } else {
@@ -79,6 +79,11 @@ const RegisterPage = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleConfirmRegistration = () => {
+    setShowSuccessModal(false);
+    navigate("/login");
   };
 
   return (
@@ -185,6 +190,34 @@ const RegisterPage = () => {
             </p>
           </div>
         </div>
+
+        {/* Modal de confirmación de registro exitoso */}
+        {showSuccessModal && (
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/50">
+            <div className="w-11/12 max-w-sm bg-white rounded-lg shadow-xl p-6">
+              <h3 className="text-lg font-semibold mb-4 text-green-600">
+                ¡Registro exitoso!
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Tu cuenta ha sido creada correctamente
+              </p>
+              <div className="flex justify-end gap-4">
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="px-4 py-2 rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold"
+                >
+                  Cerrar
+                </button>
+                <button
+                  onClick={handleConfirmRegistration}
+                  className="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 font-semibold"
+                >
+                  Ir a Iniciar Sesión
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </>
