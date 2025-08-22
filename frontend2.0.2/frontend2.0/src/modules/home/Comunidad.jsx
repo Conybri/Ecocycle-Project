@@ -47,7 +47,7 @@ const Comunidad = () => {
   const discussions = [
     {
       id: 1,
-      img: "https://randomuser.me/api/portraits/men/33.jpg",
+      img: "https://randomuser.me/api/portraits/men/35.jpg",
       name: "Luis Pérez",
       time: "hace 2 horas",
       content:
