@@ -389,6 +389,13 @@ const HomePage = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 bg-white rounded-xl shadow-sm text-center">
+              <div className="relative w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                <img
+                  src="https://randomuser.me/api/portraits/women/45.jpg"
+                  alt="Foto de María González"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
               <div className="text-2xl mb-4 text-yellow-400">⭐⭐⭐⭐⭐</div>
               <p className="italic text-gray-700 leading-relaxed mb-6">
                 "EcoCycle ha cambiado mi forma de ver el reciclaje. Ahora es
@@ -405,6 +412,13 @@ const HomePage = () => {
               </div>
             </div>
             <div className="p-8 bg-white rounded-xl shadow-sm text-center">
+              <div className="relative w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                <img
+                  src="https://randomuser.me/api/portraits/women/78.jpg"
+                  alt="Foto de EcoRecicla S.A."
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
               <div className="text-2xl mb-4 text-yellow-400">⭐⭐⭐⭐⭐</div>
               <p className="italic text-gray-700 leading-relaxed mb-6">
                 "Como empresa, EcoCycle nos ayudó a conectar con más clientes
@@ -418,6 +432,13 @@ const HomePage = () => {
               </div>
             </div>
             <div className="p-8 bg-white rounded-xl shadow-sm text-center">
+              <div className="relative w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+                <img
+                  src="https://randomuser.me/api/portraits/men/22.jpg"
+                  alt="Foto de Carlos Ruiz"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
               <div className="text-2xl mb-4 text-yellow-400">⭐⭐⭐⭐⭐</div>
               <p className="italic text-gray-700 leading-relaxed mb-6">
                 "Los puntos y recompensas hacen que reciclar sea divertido. Mis

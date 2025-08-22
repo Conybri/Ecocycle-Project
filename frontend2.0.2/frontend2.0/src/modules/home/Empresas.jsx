@@ -105,7 +105,7 @@ const Empresas = () => {
       rating: 5,
       comment:
         "EcoCycle nos ayudó a encontrar nuevos clientes y optimizar nuestros procesos de reciclaje. Excelente plataforma.",
-      avatar: "https://randomuser.me/api/portraits/thumb/women/30.jpg",
+      avatar: "https://randomuser.me/api/portraits/women/30.jpg",
     },
     {
       name: "Carlos Mendoza",
@@ -113,7 +113,7 @@ const Empresas = () => {
       rating: 5,
       comment:
         "La plataforma es intuitiva y las herramientas de seguimiento son increíbles. Hemos aumentado nuestro volumen un 40%.",
-      avatar: "https://randomuser.me/api/portraits/thumb/men/10.jpg",
+      avatar: "https://randomuser.me/api/portraits/men/10.jpg",
     },
     {
       name: "Ana Rodríguez",
@@ -121,7 +121,7 @@ const Empresas = () => {
       rating: 5,
       comment:
         "Gracias a EcoCycle pudimos expandir nuestro negocio y conectar con empresas que comparten nuestra visión sostenible.",
-      avatar: "https://randomuser.me/api/portraits/thumb/women/90.jpg",
+      avatar: "https://randomuser.me/api/portraits/women/90.jpg",
     },
   ];
 

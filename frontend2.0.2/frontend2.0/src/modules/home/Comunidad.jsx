@@ -5,7 +5,7 @@ const Comunidad = () => {
     {
       id: 1,
       rank: "#1",
-      img: "https://randomuser.me/api/portraits/thumb/women/68.jpg",
+      img: "https://randomuser.me/api/portraits/women/68.jpg",
       name: "Ana María López",
       points: "5,820 pts",
       medal: "🥇",
@@ -13,7 +13,7 @@ const Comunidad = () => {
     {
       id: 2,
       rank: "#2",
-      img: "https://randomuser.me/api/portraits/thumb/men/45.jpg",
+      img: "https://randomuser.me/api/portraits/men/45.jpg",
       name: "Carlos Mendoza",
       points: "4,950 pts",
       medal: "🥈",
@@ -21,7 +21,7 @@ const Comunidad = () => {
     {
       id: 3,
       rank: "#3",
-      img: "https://randomuser.me/api/portraits/thumb/women/32.jpg",
+      img: "https://randomuser.me/api/portraits/women/32.jpg",
       name: "Isabella Chen",
       points: "4,720 pts",
       medal: "🥉",
@@ -29,7 +29,7 @@ const Comunidad = () => {
     {
       id: 4,
       rank: "#4",
-      img: "https://randomuser.me/api/portraits/thumb/men/50.jpg",
+      img: "https://randomuser.me/api/portraits/men/50.jpg",
       name: "Diego Ramírez",
       points: "4,240 pts",
       medal: "",
@@ -37,7 +37,7 @@ const Comunidad = () => {
     {
       id: 5,
       rank: "#5",
-      img: "https://randomuser.me/api/portraits/thumb/women/8.jpg",
+      img: "https://randomuser.me/api/portraits/women/8.jpg",
       name: "María José Silva",
       points: "3,890 pts",
       medal: "",
@@ -47,7 +47,7 @@ const Comunidad = () => {
   const discussions = [
     {
       id: 1,
-      img: "https://randomuser.me/api/portraits/thumb/men/33.jpg",
+      img: "https://randomuser.me/api/portraits/men/33.jpg",
       name: "Luis Pérez",
       time: "hace 2 horas",
       content:
@@ -57,7 +57,7 @@ const Comunidad = () => {
     },
     {
       id: 2,
-      img: "https://randomuser.me/api/portraits/thumb/women/24.jpg",
+      img: "https://randomuser.me/api/portraits/women/24.jpg",
       name: "Sandra Torres",
       time: "hace 4 horas",
       content:
@@ -67,7 +67,7 @@ const Comunidad = () => {
     },
     {
       id: 3,
-      img: "https://randomuser.me/api/portraits/thumb/men/19.jpg",
+      img: "https://randomuser.me/api/portraits/men/19.jpg",
       name: "Roberto Kim",
       time: "hace 6 horas",
       content:
