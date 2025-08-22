@@ -157,32 +157,34 @@ const Comunidad = () => {
               </div>
             </section>
 
-            <section className="bg-white rounded-xl p-6 shadow-md">
-              <h2 className="text-2xl font-bold text-center mb-6">
-                Historias que Inspiran
-              </h2>
-              <div className="space-y-6">
-                {inspiringStories.map((story) => (
-                  <div
-                    key={story.id}
-                    className="flex gap-4 border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow"
-                  >
-                    <span className="text-4xl mt-1">{story.icon}</span>
-                    <div>
-                      <h3 className="font-semibold mb-2">{story.title}</h3>
-                      <p className="text-sm text-gray-600 mb-3">
-                        {story.description}
-                      </p>
-                      <div className="flex justify-between items-center mt-8">
-                        <span className="text-xs text-gray-500">
-                          ⏱️ {story.time} de lectura
-                        </span>
+            <div className="mb-10">
+              <section className="bg-white rounded-xl p-6 shadow-md">
+                <h2 className="text-2xl font-bold text-center mb-6">
+                  Historias que Inspiran
+                </h2>
+                <div className="space-y-6">
+                  {inspiringStories.map((story) => (
+                    <div
+                      key={story.id}
+                      className="flex gap-4 border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow"
+                    >
+                      <span className="text-4xl mt-1">{story.icon}</span>
+                      <div>
+                        <h3 className="font-semibold mb-2">{story.title}</h3>
+                        <p className="text-sm text-gray-600 mb-3">
+                          {story.description}
+                        </p>
+                        <div className="flex justify-between items-center mt-8">
+                          <span className="text-xs text-gray-500">
+                            ⏱️ {story.time} de lectura
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+                  ))}
+                </div>
+              </section>
+            </div>
           </div>
 
           <div className="lg:col-span-1">
