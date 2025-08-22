@@ -25,7 +25,7 @@ const menuItems = [
     color: "from-blue-500 to-blue-600",
   },
   {
-    title: "Materiales Reciclables",
+    title: "Productos",
     icon: Package,
     path: "/dashboard/products",
     roles: ["ROLE_ADMIN"],
@@ -39,7 +39,7 @@ const menuItems = [
     color: "from-lime-500 to-lime-600",
   },
   {
-    title: "Solicitudes de Recolección",
+    title: "Órdenes",
     icon: ShoppingCart,
     path: "/dashboard/orders",
     roles: ["ROLE_ADMIN"],
@@ -282,7 +282,7 @@ function Sidebar({ isOpen, onClose }) {
                       isDarkMode ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
-                    {user?.name}
+                    {user?.role}
                   </p>
                 </div>
               </div>
