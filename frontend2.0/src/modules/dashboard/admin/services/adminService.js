@@ -1,16 +1,11 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
-
 const adminService = {
   // Dashboard stats
   getDashboardStats: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/admin/dashboard-stats`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      // TODO: Implement this endpoint in the backend
+      const response = await axios.get('/admin/dashboard-stats');
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -20,11 +15,7 @@ const adminService = {
   // Products
   getProducts: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/admin/products`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.get('/materiales');
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -33,11 +24,7 @@ const adminService = {
 
   createProduct: async (productData) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/admin/products`, productData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.post('/materiales', productData);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -46,11 +33,7 @@ const adminService = {
 
   updateProduct: async (id, productData) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/admin/products/${id}`, productData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.put(`/materiales/${id}`, productData);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -59,11 +42,7 @@ const adminService = {
 
   deleteProduct: async (id) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/admin/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.delete(`/materiales/${id}`);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -73,11 +52,7 @@ const adminService = {
   // Users
   getUsers: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/admin/users`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.get('/usuarios');
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -86,11 +61,7 @@ const adminService = {
 
   updateUserStatus: async (id, status) => {
     try {
-      const response = await axios.patch(`${API_BASE_URL}/admin/users/${id}/status`, { status }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.patch(`/usuarios/${id}/status`, { status });
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -100,11 +71,7 @@ const adminService = {
   // Orders
   getOrders: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/admin/orders`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.get('/historial-reciclaje');
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -113,11 +80,7 @@ const adminService = {
 
   updateOrderStatus: async (id, status) => {
     try {
-      const response = await axios.patch(`${API_BASE_URL}/admin/orders/${id}/status`, { status }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      });
+      const response = await axios.patch(`/historial-reciclaje/${id}/status`, { status });
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -127,11 +90,9 @@ const adminService = {
   // Analytics
   getAnalytics: async (period = '7d') => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/admin/analytics`, {
+      // TODO: Implement this endpoint in the backend
+      const response = await axios.get('/admin/analytics', {
         params: { period },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
       });
       return response.data;
     } catch (error) {
